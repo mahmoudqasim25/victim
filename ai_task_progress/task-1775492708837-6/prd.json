@@ -1,0 +1,79 @@
+{
+  "project": "React Router Setup",
+  "branchName": "ralph/react-router-setup",
+  "description": "Configure React Router in App.jsx with Navbar navigation and two pages (Home and HelloWorld)",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Add React Router imports to App.jsx",
+      "description": "As a developer, I need to import Router, Routes, and Route from react-router-dom to enable routing.",
+      "acceptanceCriteria": [
+        "Import BrowserRouter as Router from 'react-router-dom'",
+        "Import Routes from 'react-router-dom'",
+        "Import Route from 'react-router-dom'",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Import Navbar and page components",
+      "description": "As a developer, I need to import the Navbar component and page components.",
+      "acceptanceCriteria": [
+        "Import Navbar from './components/Navbar'",
+        "Import Home from './pages/Home'",
+        "Import HelloWorld from './pages/HelloWorld'",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-003",
+      "title": "Create container and content style objects",
+      "description": "As a developer, I need to define CSS-in-JS style objects for the app layout.",
+      "acceptanceCriteria": [
+        "Define containerStyle with display: 'flex', flexDirection: 'column', height: '100vh'",
+        "Define contentStyle with flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'",
+        "Typecheck passes"
+      ],
+      "priority": 3,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-004",
+      "title": "Implement App component with Router and layouts",
+      "description": "As a developer, I need to replace the App function with Router-based layout structure.",
+      "acceptanceCriteria": [
+        "App returns JSX wrapped in Router component",
+        "Router contains a div with containerStyle applied",
+        "Navbar component is rendered inside the container",
+        "main element with contentStyle contains Routes component",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": false,
+      "notes": ""
+    },
+    {
+      "id": "US-005",
+      "title": "Add Home and HelloWorld routes",
+      "description": "As a user, I need to navigate between Home and HelloWorld pages.",
+      "acceptanceCriteria": [
+        "Route with path='/' renders Home component",
+        "Route with path='/hello' renders HelloWorld component",
+        "Routes component contains both Route definitions",
+        "Default export of App remains in place",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 5,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}
