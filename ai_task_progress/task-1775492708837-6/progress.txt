@@ -1,0 +1,23 @@
+## Codebase Patterns
+- React Router DOM v7.14.0 is installed and configured
+- Pages are functional components in src/pages/ directory
+- Components are stored in src/components/ directory
+- CSS styling uses inline style objects with camelCase properties
+- All components are default exports
+
+## 2026-04-06 18:07 - US-001 through US-005
+Thread: https://ampcode.com/threads/task-1775492708837-6
+- Implemented complete React Router setup in App.jsx
+- Added BrowserRouter (imported as Router) with proper routing structure
+- Created containerStyle and contentStyle objects for layout
+- Implemented main Router component with flex layout structure
+- Added Routes with path='/' (Home) and path='/hello' (HelloWorld)
+- Files changed: src/App.jsx (modified)
+- **Learnings for future iterations:**
+  - BrowserRouter can be imported with alias "as Router" for consistency with naming conventions
+  - Container style uses flexDirection: 'column' and height: '100vh' for full viewport height
+  - Content style uses flex: 1 to fill remaining space after Navbar
+  - Navbar and Routes are separated with Navbar at top, Routes in main element with contentStyle
+  - ESLint passes without errors for this implementation
+  - Dev server can be started with `npm run dev` (Vite-based project)
+---
