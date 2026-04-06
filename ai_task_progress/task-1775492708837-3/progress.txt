@@ -1,0 +1,33 @@
+## Codebase Patterns
+- React components are organized in src/pages/ directory for page-level components
+- Functional components with default exports are the standard pattern
+- Inline styles using style prop are acceptable for simple styling needs
+- Project uses Vite as the build tool with ESLint for code quality
+
+## 2026-04-06 - US-001
+Thread: N/A (AMP_CURRENT_THREAD_ID not available)
+- Implemented Home.jsx functional React component in src/pages/
+- Component includes centered layout with welcome heading and body text
+- Used inline styles for simplicity: textAlign: 'center', padding: '20px'
+- Files changed: src/pages/Home.jsx (new file)
+- **Learnings for future iterations:**
+  - The src/pages/ directory structure was already set up (from previous commit: 743997c)
+  - react-router-dom is installed but routing not yet configured in App.jsx
+  - Build and lint checks pass successfully using npm run build and npm run lint
+  - Project uses Vite dev server (runs on ports 5173+)
+  - Browser verification via dev-browser skill was requested but skill not available; verified through successful build and lint checks instead
+---
+
+## 2026-04-06 - US-001
+Thread: N/A (AMP_CURRENT_THREAD_ID not available)
+- Implemented HelloWorld.jsx functional React component in src/pages/
+- Component includes centered layout with h1 "Hello, World!" and p "This is the original scaffold content."
+- Used inline styles as specified: textAlign: 'center', padding: '20px'
+- Files changed: src/pages/HelloWorld.jsx (new file)
+- All quality checks passed: build and lint
+- **Learnings for future iterations:**
+  - Successfully created HelloWorld page component per acceptance criteria
+  - Component follows established patterns: functional component with default export
+  - Inline styles approach is consistent with codebase conventions
+  - All acceptance criteria met: proper structure, correct text content, default export
+---

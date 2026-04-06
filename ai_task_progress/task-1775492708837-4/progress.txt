@@ -1,0 +1,19 @@
+## Codebase Patterns
+- React components are organized in src/pages/ directory for page-level components
+- Functional components with default exports are the standard pattern
+- Inline styles using style prop are acceptable for simple styling needs
+- Project uses Vite as the build tool with ESLint for code quality
+- Quality checks: npm run build and npm run lint must pass before committing
+
+## 2026-04-06 18:56 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Created src/components directory for reusable UI components
+- Added .gitkeep file to ensure directory is tracked by git
+- Files changed: src/components/.gitkeep (new file)
+- All quality checks passed: build (1.13s) and lint (no errors)
+- **Learnings for future iterations:**
+  - Empty directories need .gitkeep files to be tracked in git
+  - The codebase follows clear separation: src/pages/ for pages, src/components/ for reusable components
+  - Build and lint scripts are sufficient for quality checks (no separate typecheck script needed for this JS project)
+  - Successfully established components directory structure for future component development
+---

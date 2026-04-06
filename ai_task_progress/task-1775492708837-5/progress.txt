@@ -1,0 +1,19 @@
+## Codebase Patterns
+- React Router DOM is already configured in dependencies
+- Pages are functional components in src/pages/ directory
+- Components are stored in src/components/ directory
+- CSS styling uses inline style objects
+
+## 2026-04-06 18:59 - US-001
+Thread: https://ampcode.com/threads/task-1775492708837-5
+- Created src/components/Navbar.jsx with React Router Link components
+- Updated src/App.jsx to include BrowserRouter, Routes, and navigation
+- Configured routes for '/' (Home) and '/hello' (HelloWorld)
+- Files changed: src/components/Navbar.jsx (new), src/App.jsx (modified)
+- **Learnings for future iterations:**
+  - The project uses functional components with React 19.2.0
+  - React Router DOM v7.14.0 is installed and supports Link components
+  - Pages (Home.jsx, HelloWorld.jsx) were already created with basic styling
+  - App.jsx needed to be updated to include routing and Navbar component
+  - ESLint configuration passes without errors for this implementation
+---

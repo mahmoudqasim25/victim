@@ -1,0 +1,30 @@
+{
+  "repo_notes": [
+    {
+      "content": "Vite 7 + React 19 app (hello-world-app). Entry: src/main.jsx renders App in StrictMode. App uses react-router-dom (BrowserRouter) with routes in App.jsx. Page components live in src/pages/; shared UI in src/components/. No authentication or cui/ folder in this repo.",
+      "author": "Team Lead"
+    }
+  ],
+  "pages": [
+    {
+      "title": "Project overview",
+      "purpose": "Stack (Vite, React, ESLint), scripts (dev, build, lint, preview), and high-level src layout.",
+      "parent": null
+    },
+    {
+      "title": "Routing and app shell",
+      "purpose": "BrowserRouter, Routes for / and /hello, flex layout, and Navbar with react-router Link navigation.",
+      "parent": null
+    },
+    {
+      "title": "Home page",
+      "purpose": "Route / — welcome heading and placeholder body copy.",
+      "parent": "Routing and app shell"
+    },
+    {
+      "title": "Hello World page",
+      "purpose": "Route /hello — hello-world heading and original scaffold-style body text.",
+      "parent": "Routing and app shell"
+    }
+  ]
+}

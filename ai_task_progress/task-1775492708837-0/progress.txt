@@ -1,0 +1,19 @@
+## Codebase Patterns
+- This is a Vite + React project (JavaScript, no TypeScript)
+- Quality checks: use `npm run lint` for code quality validation
+- Dependencies: Standard React 19.2.0 with Vite 7.3.1 build tool
+
+---
+
+## 2026-04-06 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Verified react-router-dom v7.14.0 installation
+- Confirmed package appears in package.json dependencies
+- Verified node_modules/react-router-dom exists
+- Ran lint check successfully (no TypeScript in this project)
+- **Learnings for future iterations:**
+  - This project uses JavaScript (no tsconfig.json), so "typecheck" means lint validation
+  - The project structure is: Vite build tool with React 19, ESLint for linting
+  - Package manager: npm (package-lock.json present)
+  - Previous iteration already ran `npm install react-router-dom` and committed the changes
+---
