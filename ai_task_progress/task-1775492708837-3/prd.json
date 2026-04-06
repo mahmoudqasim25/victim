@@ -1,0 +1,23 @@
+{
+  "project": "HelloWorld",
+  "branchName": "ralph/hello-world-page",
+  "description": "Migrate HelloWorld content to dedicated page component",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create HelloWorld page component",
+      "description": "As a developer, I need to extract the HelloWorld content into a dedicated page component at src/pages/HelloWorld.jsx.",
+      "acceptanceCriteria": [
+        "Create file src/pages/HelloWorld.jsx with functional React component",
+        "Component returns div with inline styles: textAlign: 'center', padding: '20px'",
+        "Div contains h1 element with text 'Hello, World!'",
+        "Div contains p element with text 'This is the original scaffold content.'",
+        "Component is exported as default",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    }
+  ]
+}

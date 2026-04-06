@@ -1,0 +1,18 @@
+## Codebase Patterns
+- This is a React + Vite project using JSX (not TypeScript)
+- Git requires .gitkeep files to track empty directories
+- Quality checks use npm run lint (ESLint)
+
+---
+
+## 2026-04-06 18:43 - US-001
+Thread: N/A
+- Implemented: Created src/pages directory structure for application routing system
+- Files changed:
+  - Created src/pages/.gitkeep to ensure directory is tracked by git
+- **Learnings for future iterations:**
+  - Project uses JSX rather than TSX, so typecheck means lint checking
+  - Empty directories need .gitkeep files to be tracked in git
+  - The pages directory will serve as the home for page-level routing components
+
+---

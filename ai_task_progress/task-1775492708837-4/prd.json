@@ -1,0 +1,21 @@
+{
+  "project": "ProjectSetup",
+  "branchName": "ralph/components-directory",
+  "description": "Create src/components directory structure for reusable UI components",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create src/components directory",
+      "description": "As a developer, I need a dedicated directory for reusable UI components.",
+      "acceptanceCriteria": [
+        "Create src/components directory",
+        "Directory exists and is committed to git",
+        "Add .gitkeep file to ensure directory is tracked",
+        "Typecheck passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    }
+  ]
+}
