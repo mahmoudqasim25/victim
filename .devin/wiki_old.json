@@ -1,0 +1,153 @@
+{
+  "repo_notes": [
+    {
+      "content": "Current app state: Vite + React single-page app with React Router navigation. The UI now has a navbar and two routed pages (`/` and `/hello`) rather than a single static App component."
+    }
+  ],
+  "pages": [
+    {
+      "title": "Project Overview",
+      "purpose": "High-level introduction to `hello-world-app`, including stack (Vite, React, React Router), dev workflow scripts, and how the app is composed.",
+      "page_notes": [
+        {
+          "content": "Primary scripts in package.json: dev, build, lint, preview."
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "purpose": "How to install dependencies and run the app locally with `npm install` and `npm run dev`, plus production build and preview commands.",
+      "parent": "Project Overview",
+      "page_notes": [
+        {
+          "content": "Dependencies include react, react-dom, and react-router-dom."
+        }
+      ]
+    },
+    {
+      "title": "Repository Structure",
+      "purpose": "Explains the key top-level files and directories: `src/`, `public/`, `index.html`, `vite.config.js`, and `eslint.config.js`.",
+      "parent": "Project Overview",
+      "page_notes": [
+        {
+          "content": "Most app behavior lives under `src/`."
+        }
+      ]
+    },
+    {
+      "title": "Application Source Code",
+      "purpose": "Overview of source layout and render flow from `src/main.jsx` into `src/App.jsx`, then routed page components.",
+      "page_notes": [
+        {
+          "content": "Components are split into `src/components/` and `src/pages/`."
+        }
+      ]
+    },
+    {
+      "title": "Application Entry Point (main.jsx)",
+      "purpose": "Documents `src/main.jsx` bootstrapping: `createRoot`, mounting into `#root`, and wrapping `App` with `StrictMode`.",
+      "parent": "Application Source Code",
+      "page_notes": [
+        {
+          "content": "The HTML mount target is defined in `index.html` as `<div id=\"root\"></div>`."
+        }
+      ]
+    },
+    {
+      "title": "Root Component and Routing (App.jsx)",
+      "purpose": "Explains `src/App.jsx` as the app shell: BrowserRouter setup, `Navbar` rendering, and route mapping for `/` -> `Home` and `/hello` -> `HelloWorld`.",
+      "parent": "Application Source Code",
+      "page_notes": [
+        {
+          "content": "Uses inline flex styles for full-height layout and centered page content."
+        }
+      ]
+    },
+    {
+      "title": "Navbar Component (components/Navbar.jsx)",
+      "purpose": "Documents navigation links and header styling. `Link` components provide client-side navigation to Home and Hello World pages.",
+      "parent": "Application Source Code",
+      "page_notes": [
+        {
+          "content": "Rendered at the top of App shell so it is visible on all routes."
+        }
+      ]
+    },
+    {
+      "title": "Home Page (pages/Home.jsx)",
+      "purpose": "Describes route `/` content and current placeholder copy used for the Home page body.",
+      "parent": "Application Source Code",
+      "page_notes": [
+        {
+          "content": "Simple presentational component with centered text."
+        }
+      ]
+    },
+    {
+      "title": "Hello World Page (pages/HelloWorld.jsx)",
+      "purpose": "Describes route `/hello` content and current scaffold-style greeting copy.",
+      "parent": "Application Source Code",
+      "page_notes": [
+        {
+          "content": "Simple presentational component with centered text."
+        }
+      ]
+    },
+    {
+      "title": "Build Toolchain",
+      "purpose": "Overview of Vite-powered development and production builds, including React Fast Refresh support.",
+      "page_notes": [
+        {
+          "content": "Configured in `vite.config.js` with `@vitejs/plugin-react`."
+        }
+      ]
+    },
+    {
+      "title": "Vite Configuration (vite.config.js)",
+      "purpose": "Explains the `defineConfig` setup and React plugin registration used by dev server and build pipeline.",
+      "parent": "Build Toolchain",
+      "page_notes": [
+        {
+          "content": "Configuration is intentionally minimal."
+        }
+      ]
+    },
+    {
+      "title": "Code Quality and Linting",
+      "purpose": "Overview of ESLint use in the project and rule coverage for JS/JSX React files.",
+      "page_notes": [
+        {
+          "content": "Lint command is available as `npm run lint`."
+        }
+      ]
+    },
+    {
+      "title": "ESLint Configuration (eslint.config.js)",
+      "purpose": "Describes flat config setup, recommended JS rules, React Hooks and React Refresh plugin integration, and `dist` ignore behavior.",
+      "parent": "Code Quality and Linting",
+      "page_notes": [
+        {
+          "content": "Custom `no-unused-vars` rule allows variables matching `^[A-Z_]`."
+        }
+      ]
+    },
+    {
+      "title": "Static Assets and HTML Shell",
+      "purpose": "Covers `public/vite.svg` favicon and `index.html` SPA shell with root mount and module script entry.",
+      "page_notes": [
+        {
+          "content": "Favicon is referenced from `index.html` as `/vite.svg`."
+        }
+      ]
+    },
+    {
+      "title": "Glossary",
+      "purpose": "Defines core project terms for onboarding (SPA shell, route, BrowserRouter, StrictMode, Fast Refresh).",
+      "page_notes": [
+        {
+          "content": "Keep this page updated as architecture grows."
+        }
+      ]
+    }
+  ]
+}
