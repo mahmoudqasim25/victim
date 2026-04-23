@@ -1,0 +1,22 @@
+## Codebase Patterns
+- Pages in src/pages/ are simple functional components with default exports, no TypeScript
+- App.jsx handles routing via react-router-dom (BrowserRouter + Routes + Route)
+- Flexbox centering (display: flex, justifyContent: center, alignItems: center) is applied at the App.jsx contentStyle level, not in individual pages
+- Lint (eslint) and build (vite build) are the quality checks — no separate typecheck script
+- No test script configured; build verification is sufficient
+
+---
+
+## 2025-07-25 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implemented Demo.jsx page component at src/pages/Demo.jsx
+- Component is a default-exported functional React component named Demo
+- Returns a div with Flexbox centering styles (display: flex, justifyContent: center, alignItems: center) containing an h1 with "welcome from demo 1"
+- Files changed: src/pages/Demo.jsx (created)
+- **Learnings for future iterations:**
+  - The project uses Vite + React (JSX, not TSX) with no TypeScript configuration
+  - Quality checks: `npm run lint` (eslint) and `npm run build` (vite build) — both pass
+  - Existing pages (Home.jsx, HelloWorld.jsx) use inline style objects, not CSS classes
+  - App.jsx already provides Flexbox centering via contentStyle on the <main> wrapper, so pages don't strictly need to add their own flex centering, but the story required it explicitly in the component
+  - No routing registration was required by the story acceptance criteria; component creation was sufficient
+---
