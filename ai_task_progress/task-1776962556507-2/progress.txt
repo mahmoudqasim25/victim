@@ -1,0 +1,18 @@
+## Codebase Patterns
+- Project uses Vite + React with react-router-dom for routing
+- Navbar uses `<Link>` from react-router-dom (not NavLink)
+- Quality checks: `npm run build` and `npm run lint` (ESLint)
+- No TypeScript - pure JSX project
+
+---
+
+## 2025-01-01 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- What was implemented: Added `<Link to="/demo">Demo</Link>` to the Navbar component after the Hello World link
+- Files changed: `src/components/Navbar.jsx`
+- **Learnings for future iterations:**
+  - The Navbar already had `Link` imported from `react-router-dom`, so no import changes were needed
+  - `edit_file` had issues with line endings on Windows; used `write_file` instead to rewrite the full file
+  - Build (`npm run build`) and lint (`npm run lint`) both pass cleanly
+  - No test suite exists in this project - quality check is build + lint only
+---
