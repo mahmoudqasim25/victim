@@ -1,11 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Privacy from './pages/Privacy'
 import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
-import Terms from './pages/Terms'
-import Contact from './pages/Contact'
-import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 
 const containerStyle = {
