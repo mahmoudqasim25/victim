@@ -1,0 +1,22 @@
+{
+  "project": "MyApp",
+  "branchName": "plan-0aa0ea74-8992-4d11-ac23-afc63e37d6b8/plan-001-add-privacy-page-route",
+  "description": "Add Privacy page route to application",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Add Privacy page route",
+      "description": "As a developer, I need to import the Privacy component and register its route so users can access the privacy page.",
+      "acceptanceCriteria": [
+        "Import Privacy from './pages/Privacy' at the top of src/App.jsx",
+        "Ensure <Routes> is imported from 'react-router-dom' in src/App.jsx",
+        "Add <Route path=\"/privacy\" element={<Privacy />} /> inside the <Routes> block",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill that navigating to /privacy renders the Privacy page"
+      ],
+      "priority": 1,
+      "passes": false,
+      "notes": ""
+    }
+  ]
+}

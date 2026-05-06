@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import Privacy from './pages/Privacy'
 import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
 import Terms from './pages/Terms'
@@ -30,6 +31,7 @@ function App() {
             <Route path="/hello" element={<HelloWorld />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
