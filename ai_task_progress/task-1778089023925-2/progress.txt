@@ -1,0 +1,17 @@
+# Ralph Progress Log
+Started: Wed May 06 2026 20:48:59 GMT+0300 (Eastern European Summer Time)
+---
+
+## Codebase Patterns
+- Navbar links use React Router `<Link to="...">` components with inline `navStyle` object for consistent styling
+- No TypeScript in this project; use `npm run lint` and `npm run build` for quality checks (no `typecheck` script)
+
+## 2026-05-06 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Added `<Link to="/terms">Terms</Link>` to `src/components/Navbar.jsx`, matching existing link pattern
+- Files changed: `src/components/Navbar.jsx`
+- **Learnings for future iterations:**
+  - Project uses Vite + React with react-router-dom; no TypeScript
+  - Quality checks: `npm run lint` (ESLint) and `npm run build` (Vite) — no `typecheck` script
+  - All navbar links share the same `navStyle` object; no extra CSS classes needed for new links
+---

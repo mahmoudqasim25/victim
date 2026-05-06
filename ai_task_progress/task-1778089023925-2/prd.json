@@ -1,0 +1,22 @@
+{
+  "project": "WebProject",
+  "branchName": "plan-8b4b9e78-a2b8-4cc9-a738-1c3a43a539f7/plan-plan-001-add-terms-link",
+  "description": "Add Terms link to navigation bar for legal accessibility",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Add Terms link to Navbar",
+      "description": "As a user, I want to access the Terms page via the main navigation bar so that I can read the terms of service.",
+      "acceptanceCriteria": [
+        "Locate the navigation container in src/components/Navbar.jsx",
+        "Add a Link component pointing to '/terms' with the text 'Terms'",
+        "Ensure the new link uses the same CSS classes/styles as existing navbar links",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    }
+  ]
+}
