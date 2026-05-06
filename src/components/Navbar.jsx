@@ -15,7 +15,8 @@ function Navbar() {
       <Link to="/">Home</Link>
       <Link to="/hello">Hello World</Link>
       <Link to="/terms">Terms</Link>
-    </nav>
+      <Link to="/contact">Contact</Link>
+</nav>
   )
 }
 
