@@ -3,6 +3,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
 import Terms from './pages/Terms'
+import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
 
 const containerStyle = {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/hello" element={<HelloWorld />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

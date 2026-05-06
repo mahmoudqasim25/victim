@@ -1,0 +1,26 @@
+{
+  "project": "MyApp",
+  "branchName": "ralph/add-contact-page",
+  "description": "Add a new Contact page component with styled layout and placeholder form",
+  "userStories": [
+    {
+      "id": "US-001",
+      "notes": "",
+      "title": "Create Contact.jsx with Contact React component",
+      "passes": true,
+      "priority": 1,
+      "description": "As a developer, I need to add a new file src/pages/Contact.jsx that exports a default functional React component rendering a styled contact page.",
+      "acceptanceCriteria": [
+        "File src/pages/Contact.jsx exists and exports a default functional component named Contact",
+        "Component renders a centered container with padding and max-width of 600px using inline style objects",
+        "Component includes an h1 heading with text \"Contact Us\"",
+        "Component includes a paragraph with introductory text",
+        "Component displays contact details (Email, Phone, Address) with marginTop and lineHeight styles",
+        "Component contains a placeholder section for a future contact form",
+        "All style definitions are inline JavaScript style objects",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ]
+    }
+  ]
+}
