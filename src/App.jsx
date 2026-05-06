@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
+import Terms from './pages/Terms'
+import NotFound from './pages/NotFound'
 
 const containerStyle = {
   display: 'flex',
@@ -25,6 +27,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/hello" element={<HelloWorld />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>

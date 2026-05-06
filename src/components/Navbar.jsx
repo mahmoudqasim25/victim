@@ -14,6 +14,7 @@ function Navbar() {
     <nav style={navStyle}>
       <Link to="/">Home</Link>
       <Link to="/hello">Hello World</Link>
+      <Link to="/terms">Terms</Link>
     </nav>
   )
 }
