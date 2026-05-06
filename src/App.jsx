@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
+import About from './pages/About'
 import NotFound from './pages/NotFound'
 
 const containerStyle = {
@@ -26,6 +27,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/hello" element={<HelloWorld />} />
+            <Route path="/about" element={<About />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
