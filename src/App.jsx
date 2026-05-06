@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
 import Terms from './pages/Terms'
 import Contact from './pages/Contact'
+import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 
 const containerStyle = {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

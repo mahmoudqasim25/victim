@@ -17,6 +17,7 @@ function Navbar() {
       <Link to="/privacy">Privacy</Link>
       <Link to="/terms">Terms</Link>
       <Link to="/contact">Contact</Link>
+      <Link to="/login">Login</Link>
     </nav>
   )
 }
