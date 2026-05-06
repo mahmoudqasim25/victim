@@ -1,0 +1,23 @@
+{
+  "project": "TermsAndConditions",
+  "branchName": "plan-8b4b9e78-a2b8-4cc9-a738-1c3a43a539f7/plan-1-add-terms-page",
+  "description": "Create a new Terms and Conditions page component in src/pages/Terms.jsx",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Implement Terms component",
+      "description": "As a user, I want to be able to view the Terms and Conditions page so I can understand the legal requirements of using the service.",
+      "acceptanceCriteria": [
+        "Create file `src/pages/Terms.jsx` with functional component `Terms` and default export",
+        "Component includes <h1>Terms and Conditions</h1>",
+        "Component includes at least two <p> tags with Lorem Ipsum text",
+        "Component uses a container that matches existing page padding patterns",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+# Ralph Progress Log
+Started: Wed May 06 2026 20:45:38 GMT+0300 (Eastern European Summer Time)
+---
+
+## Codebase Patterns
+- Pages use inline styles with `{ textAlign: 'center', padding: '20px' }` as the container pattern
+- All pages are functional components with a default export
+- No TypeScript — project is plain JSX with Vite + React
+
+## 2025-01-01 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Created `src/pages/Terms.jsx` with functional component `Terms` and default export
+- Component includes `<h1>Terms and Conditions</h1>` and two `<p>` tags with Lorem Ipsum text
+- Container style matches existing page padding pattern: `{ textAlign: 'center', padding: '20px' }`
+- Files changed: `src/pages/Terms.jsx`
+- **Learnings for future iterations:**
+  - Existing pages (Home, About, HelloWorld) all use `style={{ textAlign: 'center', padding: '20px' }}` as the page container pattern
+  - No TypeScript in this project — plain JSX only; no typecheck script, lint is the quality check
+  - `npm run lint` (eslint) is the only quality check available
+  - App.jsx uses react-router-dom v7 with BrowserRouter/Routes/Route; new pages need to be added there to be routable
+---
