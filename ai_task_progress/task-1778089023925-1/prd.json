@@ -1,0 +1,22 @@
+{
+  "project": "Web Application",
+  "branchName": "plan-8b4b9e78-a2b8-4cc9-a738-1c3a43a539f7/plan-1-add-terms-route",
+  "description": "Configure routing for the Terms of Service page in the main application entry point",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Register Terms page route in App.jsx",
+      "description": "As a user, I want to be able to navigate to /terms so that I can view the terms of service page.",
+      "acceptanceCriteria": [
+        "Import Terms component from './pages/Terms' in src/App.jsx",
+        "Add a new Route inside the Routes component with path='/terms'",
+        "Assign the <Terms /> component to the element prop of the new Route",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill that /terms loads the Terms component"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    }
+  ]
+}

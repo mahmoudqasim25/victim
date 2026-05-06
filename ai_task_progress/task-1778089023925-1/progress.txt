@@ -1,0 +1,18 @@
+# Ralph Progress Log
+Started: Wed May 06 2026 20:47:35 GMT+0300 (Eastern European Summer Time)
+---
+
+## Codebase Patterns
+- Routes are defined in `src/App.jsx` using react-router-dom `<Routes>/<Route>` inside a `<BrowserRouter>`
+- Page components live in `src/pages/` and are imported directly into `App.jsx`
+- The catch-all `<Route path="*">` for NotFound must always be last in the Routes list
+
+## [2026-05-06] - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Implemented the /terms route in src/App.jsx by importing the Terms component and adding a Route element
+- Files changed: src/App.jsx
+- **Learnings for future iterations:**
+  - Terms.jsx already existed in src/pages/ — only App.jsx needed updating
+  - Pattern: import new page component alongside others, then add `<Route path="..." element={<Component />} />` before the wildcard NotFound route
+  - Lint (`eslint .`) and build (`vite build`) are the quality checks for this project
+---
