@@ -1,0 +1,21 @@
+# Ralph Progress Log
+Started: Wed May 06 2026 20:35:06 GMT+0300 (Eastern European Summer Time)
+---
+
+## Codebase Patterns
+- Pages live in `src/pages/` as functional components with a default export
+- Layout uses inline styles; match the `{ textAlign: 'center', padding: '20px' }` pattern used by Home.jsx
+- Navbar links are added manually in `src/components/Navbar.jsx`; new routes must also be registered in `src/App.jsx`
+- No TypeScript — project is plain JSX; lint (`eslint .`) is the quality check
+---
+
+## 2026-05-06 - US-001
+Thread: https://ampcode.com/threads/$AMP_CURRENT_THREAD_ID
+- Created `src/pages/About.jsx` as a functional default-export component with `<h1>About Us</h1>` and two Lorem Ipsum `<p>` tags, styled to match Home.jsx
+- Added `/about` route to `src/App.jsx` and imported the new component
+- Added "About" `<Link>` to `src/components/Navbar.jsx`
+- **Learnings for future iterations:**
+  - All page components follow the same inline-style pattern (`textAlign: 'center', padding: '20px'`)
+  - Adding a new page requires three file edits: create the page, add the route in App.jsx, add the nav link in Navbar.jsx
+  - Lint is the only CI check (`npm run lint`); no separate typecheck script exists
+---

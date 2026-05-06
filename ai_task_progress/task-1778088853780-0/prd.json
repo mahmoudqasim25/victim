@@ -1,0 +1,24 @@
+{
+  "project": "Ralph Project",
+  "branchName": "plan-8b20f9ef-360c-4054-a103-7c2a74618e0d/plan-1-add-about-page",
+  "description": "Add an About page with dummy content and consistent layout",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Create the About page component",
+      "description": "As a user, I want to access an About page so I can read information about the site.",
+      "acceptanceCriteria": [
+        "Create src/pages/About.jsx as a functional component",
+        "Include <h1>About Us</h1> header",
+        "Include at least two <p> tags with Lorem Ipsum text",
+        "Ensure the component is the default export",
+        "Ensure the layout matches existing site pages",
+        "Typecheck passes",
+        "Verify in browser using dev-browser skill"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    }
+  ]
+}
