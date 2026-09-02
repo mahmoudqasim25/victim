@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
 const pageStyle = {
@@ -80,6 +81,7 @@ const disabledButtonStyle = {
 const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
 function Login() {
+  const navigate = useNavigate();
   const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -117,7 +119,10 @@ function Login() {
 
       if (result?.error) {
         setAuthError('Unable to sign in with those credentials. Please try again.');
+        return;
       }
+
+      navigate('/');
     } catch {
       setAuthError('Unable to sign in right now. Please try again in a moment.');
     } finally {
