@@ -16,6 +16,13 @@ const buildInvalidCredentialsError = () => ({
   },
 });
 
+const buildSignupFailure = (message = 'We could not create your account right now. Please review your details and try again.') => ({
+  error: {
+    code: 'SIGNUP_FAILED',
+    message,
+  },
+});
+
 const loginWithMock = async (email, password) => {
   if (
     email === MOCK_VALID_CREDENTIALS.email &&
@@ -30,6 +37,28 @@ const loginWithMock = async (email, password) => {
   }
 
   return buildInvalidCredentialsError();
+};
+
+const signupWithMock = async ({ name, email, password, gender }) => {
+  const normalizedEmail = email.trim().toLowerCase();
+
+  if (normalizedEmail.includes('fail')) {
+    return buildSignupFailure();
+  }
+
+  return {
+    success: true,
+    message: 'Account created in demo mode. You can now head to the login page and sign in when backend support is ready.',
+    user: {
+      name: name.trim(),
+      email: normalizedEmail,
+      gender,
+    },
+    credentials: {
+      email: normalizedEmail,
+      password,
+    },
+  };
 };
 
 const loginWithApi = async (email, password) => {
@@ -91,5 +120,39 @@ export const login = async (email, password) => {
 
   return loginWithApi(email, password);
 };
+
+/**
+ * Signup request contract:
+ * {
+ *   name: string,
+ *   email: string,
+ *   password: string,
+ *   gender: string
+ * }
+ *
+ * Successful response contract:
+ * {
+ *   success: true,
+ *   message: string,
+ *   user: {
+ *     name: string,
+ *     email: string,
+ *     gender: string
+ *   },
+ *   credentials: {
+ *     email: string,
+ *     password: string
+ *   }
+ * }
+ *
+ * Error response contract:
+ * {
+ *   error: {
+ *     code: string,
+ *     message: string
+ *   }
+ * }
+ */
+export const signup = async (payload) => signupWithMock(payload);
 
 export { AUTH_LOGIN_URL, USE_MOCK_AUTH };

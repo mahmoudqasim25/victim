@@ -21,6 +21,8 @@ export const AuthProvider = ({ children }) => {
     return result;
   };
 
+  const signup = async (payload) => authService.signup(payload);
+
   const logout = () => {
     setToken(null);
     setUser(null);
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }) => {
       isAuthenticated: Boolean(token),
       user,
       login,
+      signup,
       logout,
     }),
     [token, user],
