@@ -87,12 +87,15 @@ function ContactUs() {
   return (
     <div style={contactPageStyles.page}>
       <section style={contactPageStyles.card}>
-        <h1 style={contactPageStyles.heading}>Contact Us</h1>
+        <h1 style={contactPageStyles.heading}>Contact the recruitment team</h1>
         <p style={contactPageStyles.intro}>
-          Reach our recruitment team using the sample contact details below for general hiring-related enquiries.
+          Use this sample contact page to review how candidates, hiring partners, or internal teams
+          could reach recruitment support during a campaign.
         </p>
         <p style={contactPageStyles.helperText}>
-          These are placeholder details for layout and content review only, so each item can be updated or hidden later without redesigning the page.
+          Every phone number, email address, messaging channel, and location shown below is sample
+          content for review only. Replace these placeholder details with approved live contact
+          information before publishing the experience to end users.
         </p>
 
         <div style={contactPageStyles.contactList}>

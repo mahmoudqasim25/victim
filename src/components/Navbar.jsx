@@ -67,10 +67,10 @@ function Navbar() {
       <div style={linksGroupStyle}>
         <div style={primaryLinksStyle}>
           <Link to="/" style={navLinkStyle}>
-            Find Talent
+            Recruitment Home
           </Link>
           <Link to="/contact-us" style={navLinkStyle}>
-            Contact Recruiting
+            Recruitment Contact
           </Link>
           <Link to="/hello" style={navLinkStyle}>
             Candidate Updates
@@ -79,10 +79,10 @@ function Navbar() {
 
         <div style={authLinksStyle}>
           <Link to="/login" style={navLinkStyle}>
-            Log In
+            Candidate Log In
           </Link>
           <Link to="/signup" style={primaryActionStyle}>
-            Get Started
+            Create Profile
           </Link>
         </div>
       </div>
