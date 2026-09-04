@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import ContactUs from './pages/ContactUs'
 
 const containerStyle = {
   display: 'flex',
@@ -29,6 +30,7 @@ function App() {
             <Route path="/hello" element={<HelloWorld />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/contact-us" element={<ContactUs />} />
           </Routes>
         </main>
       </div>
