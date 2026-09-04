@@ -62,12 +62,44 @@ const navButtonStyle = {
   cursor: 'pointer',
 };
 
+const imageFrameStyle = {
+  borderRadius: '24px',
+  overflow: 'hidden',
+  minHeight: '280px',
+  backgroundColor: '#e2e8f0',
+  border: '1px solid #dbe4f0',
+  position: 'relative',
+};
+
+const imageStyle = {
+  width: '100%',
+  height: '100%',
+  minHeight: '280px',
+  objectFit: 'cover',
+  display: 'block',
+};
+
+const fallbackImageContentStyle = {
+  minHeight: '280px',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'flex-start',
+  gap: '10px',
+  padding: '28px',
+  background: 'linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%)',
+  color: '#0f172a',
+  boxSizing: 'border-box',
+};
+
 function Partners() {
   const safePartners = useMemo(
     () =>
       partnerRecords.map((partner, index) => ({
         ...partner,
         image: partner.image || fallbackImage,
+        hasImage: Boolean(partner.image),
         name: partner.name || `${fallbackName} ${index + 1}`,
         description: partner.description || fallbackDescription,
         joinAt: partner.joinAt || fallbackJoinAt,
@@ -76,18 +108,21 @@ function Partners() {
   );
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [imageLoadError, setImageLoadError] = useState(false);
   const activePartner = safePartners[activeIndex];
+  const shouldShowImageFallback = imageLoadError || !activePartner.hasImage;
+
+  const updateActiveIndex = (nextIndex) => {
+    setImageLoadError(false);
+    setActiveIndex(nextIndex);
+  };
 
   const handlePrevious = () => {
-    setActiveIndex((currentIndex) =>
-      currentIndex === 0 ? safePartners.length - 1 : currentIndex - 1
-    );
+    updateActiveIndex(activeIndex === 0 ? safePartners.length - 1 : activeIndex - 1);
   };
 
   const handleNext = () => {
-    setActiveIndex((currentIndex) =>
-      currentIndex === safePartners.length - 1 ? 0 : currentIndex + 1
-    );
+    updateActiveIndex(activeIndex === safePartners.length - 1 ? 0 : activeIndex + 1);
   };
 
   return (
@@ -202,29 +237,25 @@ function Partners() {
               alignItems: 'stretch',
             }}
           >
-            <div
-              style={{
-                borderRadius: '24px',
-                overflow: 'hidden',
-                minHeight: '280px',
-                backgroundColor: '#e2e8f0',
-                border: '1px solid #dbe4f0',
-              }}
-            >
-              <img
-                src={activePartner.image}
-                alt={activePartner.name}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  minHeight: '280px',
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
-                onError={(event) => {
-                  event.currentTarget.src = fallbackImage;
-                }}
-              />
+            <div style={imageFrameStyle}>
+              {shouldShowImageFallback ? (
+                <div style={fallbackImageContentStyle}>
+                  <span style={{ color: '#2563eb', fontWeight: 700 }}>Image unavailable</span>
+                  <strong style={{ fontSize: '1.4rem' }}>{activePartner.name}</strong>
+                  <p style={{ margin: 0, color: '#334155', lineHeight: 1.7 }}>
+                    A branded placeholder is shown until partner artwork is ready.
+                  </p>
+                </div>
+              ) : (
+                <img
+                  src={activePartner.image}
+                  alt={activePartner.name}
+                  style={imageStyle}
+                  onError={() => {
+                    setImageLoadError(true);
+                  }}
+                />
+              )}
             </div>
 
             <div
@@ -285,7 +316,7 @@ function Partners() {
                 <button
                   key={partner.id}
                   type="button"
-                  onClick={() => setActiveIndex(index)}
+                  onClick={() => updateActiveIndex(index)}
                   style={{
                     borderRadius: '18px',
                     border: isActive ? '1px solid #2563eb' : '1px solid #dbe4f0',
