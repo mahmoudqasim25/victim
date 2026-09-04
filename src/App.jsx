@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
@@ -27,9 +28,22 @@ const centeredContentStyle = {
   alignItems: 'center'
 }
 
+const pageTitles = {
+  '/': 'FlairsTech Recruitment Overview',
+  '/hello': 'FlairsTech Recruitment Hello World Review',
+  '/login': 'FlairsTech Recruitment Candidate Log In',
+  '/signup': 'FlairsTech Recruitment Create Profile',
+  '/contact-us': 'FlairsTech Recruitment Contact',
+  '/partners': 'FlairsTech Recruitment Hiring Partners'
+}
+
 function AppLayout() {
   const location = useLocation()
   const isFullWidthRoute = location.pathname === '/' || location.pathname === '/partners'
+
+  useEffect(() => {
+    document.title = pageTitles[location.pathname] ?? 'FlairsTech Recruitment Hello World'
+  }, [location.pathname])
 
   return (
     <div style={appShellStyle}>
