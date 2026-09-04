@@ -33,6 +33,11 @@ const processSteps = [
       'Review placeholder role themes and hiring priorities that show how future campaigns can be organized without implying live vacancies.',
   },
   {
+    title: 'Meet our hiring partners',
+    description:
+      'Browse the partner showcase to understand the employers, teams, and collaboration models featured in the recruitment experience.',
+  },
+  {
     title: 'Stay connected',
     description:
       'Use the contact route for questions, updates, or recruiting conversations while the platform evolves.',
@@ -142,8 +147,9 @@ function Home() {
                 }}
               >
                 This sample home page introduces the recruitment platform, explains the journey in
-                plain language, and guides visitors toward profile creation or recruiter contact.
-                All copy, stats, and highlights below are placeholder content for demonstration.
+                plain language, and guides visitors toward profile creation, hiring partner
+                discovery, or recruiter contact. All copy, stats, and highlights below are
+                placeholder content for demonstration.
               </p>
             </div>
             <div
@@ -166,6 +172,20 @@ function Home() {
                 }}
               >
                 Start your application
+              </Link>
+              <Link
+                to="/partners"
+                style={{
+                  textDecoration: 'none',
+                  backgroundColor: '#ffffff',
+                  color: '#0f172a',
+                  padding: '14px 22px',
+                  borderRadius: '999px',
+                  fontWeight: 700,
+                  border: '1px solid #cbd5e1',
+                }}
+              >
+                Explore hiring partners
               </Link>
               <Link
                 to="/contact-us"
@@ -286,6 +306,45 @@ function Home() {
         <section
           style={{
             ...sectionStyle,
+            background:
+              'linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(255, 255, 255, 0.98) 100%)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '20px',
+            alignItems: 'center',
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <span style={{ color: '#2563eb', fontWeight: 700 }}>Featured next step</span>
+            <h2 style={{ margin: 0, fontSize: '1.9rem', color: '#0f172a' }}>
+              Explore the hiring partners behind the recruitment journey.
+            </h2>
+            <p style={{ margin: 0, color: '#475569', lineHeight: 1.7, maxWidth: '640px' }}>
+              Give candidates and stakeholders a direct path to the partner experience so they can
+              see the organizations, brands, or teams represented in this recruitment showcase.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'flex-start' }}>
+            <Link
+              to="/partners"
+              style={{
+                textDecoration: 'none',
+                backgroundColor: '#2563eb',
+                color: '#ffffff',
+                padding: '14px 22px',
+                borderRadius: '999px',
+                fontWeight: 700,
+                boxShadow: '0 12px 24px rgba(37, 99, 235, 0.2)',
+              }}
+            >
+              View hiring partners
+            </Link>
+          </div>
+        </section>
+
+        <section
+          style={{
+            ...sectionStyle,
             backgroundColor: '#0f172a',
             color: '#ffffff',
             display: 'flex',
@@ -299,9 +358,9 @@ function Home() {
             Move from interest to action with a clear recruitment journey.
           </h2>
           <p style={{ margin: 0, maxWidth: '720px', lineHeight: 1.7, color: '#cbd5e1' }}>
-            Candidates can begin with sign-up, while recruiters or curious visitors can use the
-            contact page for follow-up. This section is intentionally simple so future teams can
-            swap in campaign-specific calls to action.
+            Candidates can begin with sign-up, explore hiring partners, or use the contact page
+            for follow-up. This section is intentionally simple so future teams can swap in
+            campaign-specific calls to action.
           </p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
             <Link
@@ -316,6 +375,20 @@ function Home() {
               }}
             >
               Create candidate account
+            </Link>
+            <Link
+              to="/partners"
+              style={{
+                textDecoration: 'none',
+                backgroundColor: 'transparent',
+                color: '#ffffff',
+                padding: '14px 22px',
+                borderRadius: '999px',
+                fontWeight: 700,
+                border: '1px solid rgba(255, 255, 255, 0.35)',
+              }}
+            >
+              Meet hiring partners
             </Link>
             <Link
               to="/contact-us"
