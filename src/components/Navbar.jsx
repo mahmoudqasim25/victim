@@ -61,22 +61,22 @@ function Navbar() {
   return (
     <nav style={navStyle}>
       <Link to="/" style={brandStyle}>
-        RecruitFlow
+        FlairsTech Recruitment
       </Link>
 
       <div style={linksGroupStyle}>
         <div style={primaryLinksStyle}>
           <Link to="/" style={navLinkStyle}>
-            Recruitment Home
-          </Link>
-          <Link to="/partners" style={navLinkStyle}>
-            Explore Hiring Partners
-          </Link>
-          <Link to="/contact-us" style={navLinkStyle}>
-            Recruitment Contact
+            Overview
           </Link>
           <Link to="/hello" style={navLinkStyle}>
-            Candidate Updates
+            Hello World Review
+          </Link>
+          <Link to="/partners" style={navLinkStyle}>
+            Hiring Partners
+          </Link>
+          <Link to="/contact-us" style={navLinkStyle}>
+            Contact
           </Link>
         </div>
 
