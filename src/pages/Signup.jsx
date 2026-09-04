@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import AuthFormCard from '../components/AuthFormCard';
 
 const authFormStyles = {
@@ -92,6 +93,7 @@ const genderOptions = [
 ];
 
 function Signup() {
+  const { signup } = useAuth();
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -150,16 +152,21 @@ function Signup() {
     setIsSubmitting(true);
 
     try {
-      await new Promise((resolve) => {
-        window.setTimeout(resolve, 400);
+      const result = await signup({
+        name: trimmedName,
+        email: trimmedEmail,
+        password: formValues.password,
+        gender: formValues.gender,
       });
 
-      if (trimmedEmail.toLowerCase().includes('fail')) {
-        setSubmitError('We could not create your account right now. Please review your details and try again.');
+      if (result?.error) {
+        setSubmitError(result.error.message);
         return;
       }
 
-      setSubmitSuccess('Account created in demo mode. You can now head to the login page and sign in when backend support is ready.');
+      setSubmitSuccess(result?.message || 'Account created successfully.');
+    } catch {
+      setSubmitError('We could not create your account right now. Please try again in a moment.');
     } finally {
       setIsSubmitting(false);
     }
