@@ -70,7 +70,7 @@ function Navbar() {
             Recruitment Home
           </Link>
           <Link to="/partners" style={navLinkStyle}>
-            Hiring Partners
+            Explore Hiring Partners
           </Link>
           <Link to="/contact-us" style={navLinkStyle}>
             Recruitment Contact

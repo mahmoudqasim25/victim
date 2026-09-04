@@ -33,7 +33,7 @@ const processSteps = [
       'Review placeholder role themes and hiring priorities that show how future campaigns can be organized without implying live vacancies.',
   },
   {
-    title: 'Meet our hiring partners',
+    title: 'Explore hiring partners',
     description:
       'Browse the partner showcase to understand the employers, teams, and collaboration models featured in the recruitment experience.',
   },
@@ -337,7 +337,7 @@ function Home() {
                 boxShadow: '0 12px 24px rgba(37, 99, 235, 0.2)',
               }}
             >
-              View hiring partners
+              Explore hiring partners
             </Link>
           </div>
         </section>
@@ -388,7 +388,7 @@ function Home() {
                 border: '1px solid rgba(255, 255, 255, 0.35)',
               }}
             >
-              Meet hiring partners
+              Explore hiring partners
             </Link>
             <Link
               to="/contact-us"
