@@ -5,6 +5,7 @@ import HelloWorld from './pages/HelloWorld'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ContactUs from './pages/ContactUs'
+import Partners from './pages/Partners'
 
 const appShellStyle = {
   minHeight: '100vh',
@@ -28,18 +29,19 @@ const centeredContentStyle = {
 
 function AppLayout() {
   const location = useLocation()
-  const isHomeRoute = location.pathname === '/'
+  const isFullWidthRoute = location.pathname === '/' || location.pathname === '/partners'
 
   return (
     <div style={appShellStyle}>
       <Navbar />
-      <main style={isHomeRoute ? fullWidthContentStyle : centeredContentStyle}>
+      <main style={isFullWidthRoute ? fullWidthContentStyle : centeredContentStyle}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<HelloWorld />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/partners" element={<Partners />} />
         </Routes>
       </main>
     </div>
