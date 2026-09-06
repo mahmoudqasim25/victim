@@ -1,139 +1,43 @@
-const contactPageStyles = {
-  page: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '20px',
-    boxSizing: 'border-box',
-  },
-  card: {
-    width: '100%',
-    maxWidth: '960px',
-    padding: '32px',
-    border: '1px solid #d1d5db',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-    backgroundColor: '#ffffff',
-    boxSizing: 'border-box',
-  },
-  heading: {
-    margin: '0 0 12px',
-    color: '#111827',
-  },
-  intro: {
-    margin: '0 0 12px',
-    color: '#4b5563',
-    lineHeight: '1.6',
-  },
-  helperText: {
-    margin: '0 0 24px',
-    color: '#6b7280',
-    lineHeight: '1.6',
-    fontSize: '14px',
-  },
-  sectionHeading: {
-    margin: '0 0 12px',
-    color: '#111827',
-    fontSize: '20px',
-  },
-  sectionHelperText: {
-    margin: '0 0 20px',
-    color: '#6b7280',
-    lineHeight: '1.6',
-    fontSize: '14px',
-  },
-  contactList: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '16px',
-  },
-  contactItem: {
-    padding: '16px',
-    border: '1px solid #e5e7eb',
-    borderRadius: '10px',
-    backgroundColor: '#f9fafb',
-  },
-  label: {
-    margin: '0 0 8px',
-    fontSize: '14px',
-    fontWeight: '700',
-    color: '#111827',
-    textTransform: 'uppercase',
-    letterSpacing: '0.04em',
-  },
-  value: {
-    margin: 0,
-    color: '#1f2937',
-    lineHeight: '1.6',
-    wordBreak: 'break-word',
-  },
-  branchSection: {
-    marginTop: '32px',
-    paddingTop: '32px',
-    borderTop: '1px solid #e5e7eb',
-  },
-  branchList: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-    gap: '16px',
-  },
-  branchItem: {
-    padding: '20px',
-    border: '1px solid #e5e7eb',
-    borderRadius: '10px',
-    backgroundColor: '#f9fafb',
-  },
-  branchMeta: {
-    margin: '0 0 12px',
-    fontSize: '13px',
-    fontWeight: '700',
-    color: '#2563eb',
-    textTransform: 'uppercase',
-    letterSpacing: '0.04em',
-  },
-  branchName: {
-    margin: '0 0 8px',
-    color: '#111827',
-    fontSize: '16px',
-  },
-  branchDetail: {
-    margin: '0 0 8px',
-    color: '#1f2937',
-    lineHeight: '1.6',
-  },
-  branchDetailLabel: {
-    fontWeight: '700',
-    color: '#111827',
-  },
-  branchNote: {
-    margin: 0,
-    color: '#4b5563',
-    lineHeight: '1.6',
-  },
-};
+import PageShell, { MutedCard, PageIntro, SurfaceCard } from '../components/PageShell'
+import { tokens } from '../components/designSystem'
 
-const contactItems = [
+const supportOptions = [
   {
-    label: 'Phone',
-    value: '+1 (555) 010-2040',
-    isVisible: true,
-  },
-  {
-    label: 'Email',
+    label: 'General recruitment support',
     value: 'recruitment@example.com',
-    isVisible: true,
+    detail: 'Best for application questions, timelines, and next-step guidance.',
   },
   {
-    label: 'WhatsApp',
+    label: 'Candidate phone line',
+    value: '+1 (555) 010-2040',
+    detail: 'Use for urgent support during business hours when you need direct assistance.',
+  },
+  {
+    label: 'Messaging support',
     value: '+1 (555) 010-2041',
-    isVisible: true,
+    detail: 'Suitable for quick updates, reminders, and simple coordination requests.',
   },
   {
-    label: 'Location',
-    value: 'Sample Recruitment Desk, 250 Market Street, Suite 400, San Francisco, CA 94105, United States',
-    isVisible: true,
+    label: 'Recruitment desk location',
+    value: '250 Market Street, Suite 400, San Francisco, CA 94105, United States',
+    detail: 'A sample office location shown for layout review and public journey planning.',
   },
-];
+]
+
+const supportMoments = [
+  {
+    title: 'Before you apply',
+    description: 'Ask about role fit, hiring partners, or what information to prepare before creating your profile.',
+  },
+  {
+    title: 'During review',
+    description: 'Use support channels for status questions, interview coordination, or accessibility requests.',
+  },
+  {
+    title: 'After follow-up',
+    description: 'Reconnect with the team if you need clarification on next steps or updated availability.',
+  },
+]
 
 const branchItems = [
   {
@@ -164,59 +68,111 @@ const branchItems = [
     supportHours: 'Mon-Fri, 9:00 AM-6:00 PM SGT',
     presence: 'Talent sourcing and onboarding support for APAC commercial and product roles.',
   },
-];
+]
+
+const gridStyle = (minWidth) => ({
+  display: 'grid',
+  gridTemplateColumns: `repeat(auto-fit, minmax(${minWidth}, 1fr))`,
+  gap: '16px',
+})
 
 function ContactUs() {
-  const visibleContactItems = contactItems.filter((item) => item.isVisible);
-
   return (
-    <div style={contactPageStyles.page}>
-      <section style={contactPageStyles.card}>
-        <h1 style={contactPageStyles.heading}>Contact the recruitment team</h1>
-        <p style={contactPageStyles.intro}>
-          Use this sample contact page to review how candidates, hiring partners, or internal teams
-          could reach recruitment support during a campaign.
-        </p>
-        <p style={contactPageStyles.helperText}>
-          Every phone number, email address, messaging channel, location, and branch detail shown
-          below is sample content for review only. Replace these placeholder details with approved
-          live information before publishing the experience to end users.
-        </p>
+    <PageShell>
+      <SurfaceCard
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px',
+          alignItems: 'center',
+          background:
+            'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0.96) 55%, rgba(14, 165, 233, 0.08) 100%)',
+        }}
+      >
+        <PageIntro
+          eyebrow="Recruitment support"
+          title="Get clear help through the channel that fits your question."
+          description="The contact page now presents support options in a cleaner hierarchy so candidates, partners, and internal teams can quickly understand how to reach recruitment support and what each channel is best for."
+        />
 
-        <div style={contactPageStyles.contactList}>
-          {visibleContactItems.map((item) => (
-            <article key={item.label} style={contactPageStyles.contactItem}>
-              <h2 style={contactPageStyles.label}>{item.label}</h2>
-              <p style={contactPageStyles.value}>{item.value}</p>
-            </article>
+        <MutedCard>
+          <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Support note</span>
+          <p style={{ margin: '10px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+            Contact details shown here remain sample content for review. Replace them with approved live information before publishing to candidates.
+          </p>
+        </MutedCard>
+      </SurfaceCard>
+
+      <SurfaceCard>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
+            Support options
+          </h2>
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
+            Choose the route that matches your need, whether you are preparing to apply, checking progress, or coordinating with the recruitment team.
+          </p>
+        </div>
+        <div style={gridStyle('240px')}>
+          {supportOptions.map((item) => (
+            <MutedCard key={item.label} style={{ backgroundColor: tokens.colors.surface }}>
+              <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>{item.label}</span>
+              <h3 style={{ margin: '8px 0 0', fontSize: '1.1rem', color: tokens.colors.text }}>{item.value}</h3>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.detail}</p>
+            </MutedCard>
           ))}
         </div>
+      </SurfaceCard>
 
-        <section style={contactPageStyles.branchSection}>
-          <h2 style={contactPageStyles.sectionHeading}>Global branches</h2>
-          <p style={contactPageStyles.sectionHelperText}>
-            Explore our sample branch presence across key hiring regions for localized support and
-            candidate coordination.
+      <SurfaceCard>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
+            When to contact us
+          </h2>
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
+            A modern support page should help visitors understand not only how to reach the team, but also when each touchpoint is most useful.
           </p>
-          <div style={contactPageStyles.branchList}>
-            {branchItems.map((branch) => (
-              <article key={branch.locationName} style={contactPageStyles.branchItem}>
-                <p style={contactPageStyles.branchMeta}>{branch.region}</p>
-                <h3 style={contactPageStyles.branchName}>{branch.locationName}</h3>
-                <p style={contactPageStyles.branchDetail}>
-                  <span style={contactPageStyles.branchDetailLabel}>Address:</span> {branch.address}
-                </p>
-                <p style={contactPageStyles.branchDetail}>
-                  <span style={contactPageStyles.branchDetailLabel}>Hours:</span> {branch.supportHours}
-                </p>
-                <p style={contactPageStyles.branchNote}>{branch.presence}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-      </section>
-    </div>
-  );
+        </div>
+        <div style={gridStyle('220px')}>
+          {supportMoments.map((item) => (
+            <MutedCard key={item.title}>
+              <h3 style={{ margin: 0, fontSize: '1.15rem', color: tokens.colors.text }}>{item.title}</h3>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.description}</p>
+            </MutedCard>
+          ))}
+        </div>
+      </SurfaceCard>
+
+      <SurfaceCard>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
+            Regional branch coverage
+          </h2>
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
+            These sample branch cards show how localized support can be presented in the same public shell and spacing system.
+          </p>
+        </div>
+        <div style={gridStyle('240px')}>
+          {branchItems.map((branch) => (
+            <MutedCard key={branch.locationName} style={{ backgroundColor: tokens.colors.surface }}>
+              <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>{branch.region}</span>
+              <h3 style={{ margin: '8px 0 0', fontSize: '1.15rem', color: tokens.colors.text }}>
+                {branch.locationName}
+              </h3>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+                <strong style={{ color: tokens.colors.text }}>Address:</strong> {branch.address}
+              </p>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+                <strong style={{ color: tokens.colors.text }}>Hours:</strong> {branch.supportHours}
+              </p>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+                {branch.presence}
+              </p>
+            </MutedCard>
+          ))}
+        </div>
+      </SurfaceCard>
+    </PageShell>
+  )
 }
 
-export default ContactUs;
+export default ContactUs

@@ -2,125 +2,87 @@ import { Link } from 'react-router-dom'
 import PageShell, { MutedCard, PageIntro, SurfaceCard } from '../components/PageShell'
 import { shellStyles, tokens } from '../components/designSystem'
 
-const heroHighlights = [
-  'Sample-only recruitment messaging that can be replaced with live campaign copy later.',
-  'A guided candidate journey from discovery to sign-up and follow-up.',
-  'Modular sections designed for quick updates by hiring, marketing, or operations teams.',
-]
-
-const sampleStats = [
+const priorityActions = [
   {
-    value: '24 roles',
-    label: 'Demo openings across operations, technology, and support functions.',
+    title: 'Create your candidate profile',
+    description: 'Start with the existing sign-up flow so recruiters can review your background and preferences.',
+    ctaLabel: 'Create profile',
+    to: '/signup',
+    primary: true,
   },
   {
-    value: '3 steps',
-    label: 'Example application journey from profile creation to recruiter follow-up.',
+    title: 'Browse hiring partners',
+    description: 'See the kinds of teams and working models represented across the recruitment journey.',
+    ctaLabel: 'View partners',
+    to: '/partners',
   },
   {
-    value: '48 hrs',
-    label: 'Placeholder response target shown for layout demonstration only.',
-  },
-]
-
-const processSteps = [
-  {
-    title: 'Create your profile',
-    description:
-      'Start the recruitment journey by sharing your experience, interests, and preferred work style through the existing sign-up flow.',
-  },
-  {
-    title: 'Explore sample pathways',
-    description:
-      'Review placeholder role themes and hiring priorities that show how future campaigns can be organized without implying live vacancies.',
-  },
-  {
-    title: 'Explore hiring partners',
-    description:
-      'Browse the partner showcase to understand the employers, teams, and collaboration models featured in the recruitment experience.',
-  },
-  {
-    title: 'Stay connected',
-    description:
-      'Use the contact route for questions, updates, or recruiting conversations while the platform evolves.',
+    title: 'Ask the recruitment team',
+    description: 'Use the contact page for support, timelines, or guidance before you apply.',
+    ctaLabel: 'Get support',
+    to: '/contact-us',
   },
 ]
 
-const featuredTracks = [
+const journeySteps = [
   {
-    title: 'Customer operations',
-    description:
-      'Demo content for high-volume hiring campaigns, onboarding support, and service delivery teams.',
+    title: 'Discover the opportunity',
+    description: 'Review the hiring focus, partner context, and support options before committing time to an application.',
   },
   {
-    title: 'Digital and data',
-    description:
-      'Placeholder messaging for analysts, engineers, and transformation specialists in future-ready programs.',
+    title: 'Share your profile',
+    description: 'Complete the current sign-up flow so the recruitment team can understand your experience and interests.',
+  },
+  {
+    title: 'Receive guided follow-up',
+    description: 'Recruiters can use the platform to coordinate next steps, answer questions, and keep communication clear.',
+  },
+]
+
+const hiringFocusAreas = [
+  {
+    title: 'Operations and service delivery',
+    description: 'Roles designed for dependable execution, customer support, and structured team environments.',
+  },
+  {
+    title: 'Digital, product, and data',
+    description: 'Opportunities suited to analytical thinking, technical collaboration, and transformation work.',
   },
   {
     title: 'Leadership and enablement',
-    description:
-      'Sample positioning for team leads, trainers, and workforce planning roles that support growth.',
+    description: 'Pathways for coaching, workforce planning, onboarding, and team performance support.',
   },
 ]
 
-const aiManagedServiceIntro = {
-  eyebrow: 'Illustrative service model',
-  title: 'How AI managed our service',
-  description:
-    'This sample section shows how AI can support a recruitment service by organizing intake details, surfacing recruiter prompts, and keeping candidate communications consistent. It is illustrative content only and does not describe live automation, verified client outcomes, or autonomous hiring decisions.',
-  disclaimer:
-    'Illustrative example only: the workflow below is a reusable content layout for future service messaging and should not be read as a live product claim.',
-  callout:
-    'Why AI was used: to help recruiters prepare faster, keep service updates consistent, and give teams a clearer view of candidate support tasks while people remain in control of decisions.',
-}
-
-const aiManagedServiceHighlights = [
+const supportSignals = [
   {
-    title: 'Structured intake support',
-    description:
-      'AI can help summarize role requirements and candidate preferences so recruitment teams start each search with a clearer brief.',
+    value: 'Fast next steps',
+    label: 'The home page now puts application, partner discovery, and support actions before secondary content.',
   },
   {
-    title: 'Recruiter-ready recommendations',
-    description:
-      'Illustrative prompts can help recruiters prepare outreach ideas, follow-up reminders, and interview coordination notes before they respond.',
+    value: 'Clearer expectations',
+    label: 'Candidates can understand what the platform is for, who it serves, and how to continue.',
   },
   {
-    title: 'Consistent service updates',
-    description:
-      'Sample workflows show how AI-assisted drafts may keep status updates, FAQs, and next-step messages aligned across the recruitment journey.',
-  },
-  {
-    title: 'Priority visibility for teams',
-    description:
-      'Business users can review example dashboards that group open actions, candidate questions, and service handoffs in one place.',
+    value: 'Shared public shell',
+    label: 'Supporting pages follow the same spacing, card hierarchy, and responsive layout system.',
   },
 ]
 
-const aiManagedServiceBenefits = [
-  'Supports recruiters with faster preparation for candidate conversations.',
-  'Helps operations teams keep service steps documented and easier to review.',
-  'Creates a repeatable layout for future recruitment copy updates without redesigning the page.',
-]
-
-const aiManagedServiceOutcomes = [
+const aiAssistancePoints = [
   {
-    value: 'Sample: 1 shared queue',
-    label: 'Illustrative service view where recruiter tasks, candidate questions, and follow-ups appear together.',
+    title: 'Assistance with preparation',
+    description: 'AI assistance can help draft recruiter notes, summarize common questions, and organize intake details for faster human follow-up.',
   },
   {
-    value: 'Illustrative: 3 support moments',
-    label: 'Example touchpoints covering intake preparation, communication drafting, and recruiter handoff support.',
+    title: 'Assistance with consistency',
+    description: 'Teams may use AI assistance to keep status updates and support messaging aligned across the candidate journey.',
   },
   {
-    value: 'Sample: weekly summary',
-    label: 'Placeholder reporting format that could help business stakeholders review service activity without implying live metrics.',
+    title: 'Human review remains essential',
+    description: 'AI assistance does not make hiring decisions, verify candidate claims, or replace recruiter judgment and direct communication.',
   },
 ]
-
-const aiManagedServiceSummary =
-  'In this illustrative model, AI acts as a support layer within the recruitment service, helping teams organize information and prepare next steps while people remain responsible for communication, review, and hiring decisions.'
 
 const gridStyle = (minWidth) => ({
   display: 'grid',
@@ -144,28 +106,28 @@ function Home() {
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
           <PageIntro
-            eyebrow="Recruitment landing page demo"
-            title="Help candidates discover FlairsTech and take the next step with confidence."
-            description="This sample home page introduces the recruitment platform, explains the journey in plain language, and guides visitors toward profile creation, hiring partner discovery, or recruiter contact. All copy, stats, and highlights below are placeholder content for demonstration."
+            eyebrow="Candidate recruitment journey"
+            title="Find the right next step faster with a clearer path from interest to application."
+            description="This landing page is structured around the actions candidates need most: create a profile, explore hiring partners, and reach recruitment support. Supporting content then explains how the journey works and where AI assistance may help recruiters behind the scenes."
           />
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
             <Link to="/signup" style={shellStyles.primaryButton}>
-              Start your application
+              Create your profile
             </Link>
             <Link to="/partners" style={shellStyles.secondaryButton}>
-              Explore hiring partners
+              Explore partners
             </Link>
             <Link to="/contact-us" style={shellStyles.secondaryButton}>
-              Contact recruitment team
+              Contact recruitment
             </Link>
           </div>
         </div>
 
         <div style={{ display: 'grid', gap: '14px' }}>
-          {heroHighlights.map((item) => (
-            <MutedCard key={item}>
-              <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Why this page exists</span>
-              <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.6 }}>{item}</p>
+          {supportSignals.map((item) => (
+            <MutedCard key={item.value}>
+              <strong style={{ color: tokens.colors.text, fontSize: '1.1rem' }}>{item.value}</strong>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.6 }}>{item.label}</p>
             </MutedCard>
           ))}
         </div>
@@ -174,18 +136,45 @@ function Home() {
       <SurfaceCard>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
           <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-            Sample recruitment highlights
+            Start with the most important recruitment actions
           </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>
-            These figures are illustrative placeholders only, included to show how campaign stats or
-            proof points can be presented on the landing page.
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
+            Candidates should not have to search for the next step. These actions are placed first so visitors can move directly into the recruitment journey or get help before applying.
           </p>
         </div>
-        <div style={gridStyle('200px')}>
-          {sampleStats.map((stat) => (
-            <MutedCard key={stat.value}>
-              <strong style={{ fontSize: '2rem', color: tokens.colors.text }}>{stat.value}</strong>
-              <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.6 }}>{stat.label}</p>
+        <div style={gridStyle('240px')}>
+          {priorityActions.map((action) => (
+            <SurfaceCard key={action.title} style={{ ...shellStyles.mutedCard, backgroundColor: tokens.colors.surface }}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', color: tokens.colors.text }}>{action.title}</h3>
+              <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>{action.description}</p>
+              <div>
+                <Link
+                  to={action.to}
+                  style={action.primary ? shellStyles.primaryButton : shellStyles.secondaryButton}
+                >
+                  {action.ctaLabel}
+                </Link>
+              </div>
+            </SurfaceCard>
+          ))}
+        </div>
+      </SurfaceCard>
+
+      <SurfaceCard>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
+            How the recruitment journey works
+          </h2>
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
+            The public experience is designed to guide candidates from discovery to action with less friction and clearer expectations.
+          </p>
+        </div>
+        <div style={gridStyle('240px')}>
+          {journeySteps.map((step, index) => (
+            <MutedCard key={step.title}>
+              <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Step {index + 1}</span>
+              <h3 style={{ margin: '8px 0 0', fontSize: '1.2rem', color: tokens.colors.text }}>{step.title}</h3>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{step.description}</p>
             </MutedCard>
           ))}
         </div>
@@ -200,42 +189,14 @@ function Home() {
             'linear-gradient(180deg, rgba(239, 246, 255, 0.95) 0%, rgba(255, 255, 255, 1) 100%)',
         }}
       >
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '20px',
-            alignItems: 'start',
-          }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>
-              {aiManagedServiceIntro.eyebrow}
-            </span>
-            <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-              {aiManagedServiceIntro.title}
-            </h2>
-            <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '860px' }}>
-              {aiManagedServiceIntro.description}
-            </p>
-          </div>
-
-          <aside
-            aria-label="Why AI was used"
-            style={{
-              backgroundColor: tokens.colors.surfaceAccent,
-              border: `1px solid ${tokens.colors.borderStrong}`,
-              borderRadius: tokens.radii.md,
-              padding: '20px 22px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '10px',
-              boxShadow: tokens.shadows.soft,
-            }}
-          >
-            <span style={{ color: tokens.colors.primaryStrong, fontWeight: 700 }}>Why AI was used</span>
-            <p style={{ margin: 0, color: '#1e3a8a', lineHeight: 1.7 }}>{aiManagedServiceIntro.callout}</p>
-          </aside>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Optional AI assistance framing</span>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
+            AI assistance can support recruitment operations, but it does not replace recruiter decisions.
+          </h2>
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '860px' }}>
+            Where AI is referenced on public pages, it is framed as assistance only. It may help teams prepare information and communicate more consistently, while people remain responsible for review, candidate conversations, and hiring outcomes.
+          </p>
         </div>
 
         <p
@@ -249,85 +210,14 @@ function Home() {
             lineHeight: 1.6,
           }}
         >
-          {aiManagedServiceIntro.disclaimer}
+          AI assistance is limited to support tasks such as drafting, summarizing, and organizing information. It should not be treated as a source of final hiring decisions, legal guidance, or verified candidate assessment.
         </p>
 
         <div style={gridStyle('240px')}>
-          {aiManagedServiceHighlights.map((item, index) => (
-            <SurfaceCard key={item.title} style={{ ...shellStyles.mutedCard, backgroundColor: tokens.colors.surface }}>
-              <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Service highlight {index + 1}</span>
+          {aiAssistancePoints.map((item) => (
+            <MutedCard key={item.title}>
               <h3 style={{ margin: 0, fontSize: '1.15rem', color: tokens.colors.text }}>{item.title}</h3>
-              <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.description}</p>
-            </SurfaceCard>
-          ))}
-        </div>
-
-        <div style={gridStyle('260px')}>
-          <SurfaceCard style={{ ...shellStyles.mutedCard, backgroundColor: tokens.colors.surface }}>
-            <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Business-friendly benefits</span>
-            <ul style={{ margin: 0, paddingLeft: '20px', color: tokens.colors.textMuted, lineHeight: 1.8 }}>
-              {aiManagedServiceBenefits.map((benefit) => (
-                <li key={benefit}>{benefit}</li>
-              ))}
-            </ul>
-          </SurfaceCard>
-
-          <SurfaceCard
-            style={{
-              ...shellStyles.mutedCard,
-              gap: '16px',
-              display: 'flex',
-              flexDirection: 'column',
-              backgroundColor: tokens.colors.surface,
-            }}
-          >
-            <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Sample outcomes</span>
-            <div style={gridStyle('180px')}>
-              {aiManagedServiceOutcomes.map((outcome) => (
-                <MutedCard key={outcome.value} style={{ padding: '16px' }}>
-                  <strong style={{ color: tokens.colors.text }}>{outcome.value}</strong>
-                  <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.6 }}>
-                    {outcome.label}
-                  </p>
-                </MutedCard>
-              ))}
-            </div>
-          </SurfaceCard>
-        </div>
-
-        <div
-          style={{
-            backgroundColor: tokens.colors.surfaceAccent,
-            border: `1px solid ${tokens.colors.borderStrong}`,
-            borderRadius: tokens.radii.md,
-            padding: '20px 24px',
-          }}
-        >
-          <h3 style={{ margin: 0, color: tokens.colors.primaryStrong, fontSize: '1rem' }}>
-            Closing summary
-          </h3>
-          <p style={{ margin: '10px 0 0', color: '#1e293b', lineHeight: 1.7, maxWidth: '900px' }}>
-            {aiManagedServiceSummary}
-          </p>
-        </div>
-      </SurfaceCard>
-
-      <SurfaceCard>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
-          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-            Candidate journey at a glance
-          </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>
-            This simple process layout keeps the recruitment path readable while preserving the
-            primary calls to action above and below.
-          </p>
-        </div>
-        <div style={gridStyle('240px')}>
-          {processSteps.map((step, index) => (
-            <MutedCard key={step.title}>
-              <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Step {index + 1}</span>
-              <h3 style={{ margin: 0, fontSize: '1.25rem', color: tokens.colors.text }}>{step.title}</h3>
-              <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>{step.description}</p>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.description}</p>
             </MutedCard>
           ))}
         </div>
@@ -336,47 +226,19 @@ function Home() {
       <SurfaceCard>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
           <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-            Featured hiring tracks
+            Hiring focus areas
           </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>
-            Modular content blocks like these make it easy to add, remove, or reorder future
-            recruitment themes without redesigning the page.
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
+            These content blocks help candidates understand the kinds of opportunities the recruitment experience can support without overwhelming the first screen.
           </p>
         </div>
         <div style={gridStyle('240px')}>
-          {featuredTracks.map((track) => (
-            <MutedCard key={track.title}>
-              <h3 style={{ margin: 0, fontSize: '1.2rem', color: tokens.colors.text }}>{track.title}</h3>
-              <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>{track.description}</p>
+          {hiringFocusAreas.map((area) => (
+            <MutedCard key={area.title}>
+              <h3 style={{ margin: 0, fontSize: '1.2rem', color: tokens.colors.text }}>{area.title}</h3>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{area.description}</p>
             </MutedCard>
           ))}
-        </div>
-      </SurfaceCard>
-
-      <SurfaceCard
-        style={{
-          background:
-            'linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(255, 255, 255, 0.98) 100%)',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '20px',
-          alignItems: 'center',
-        }}
-      >
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Featured next step</span>
-          <h2 style={{ margin: 0, fontSize: '1.9rem', color: tokens.colors.text }}>
-            Explore the hiring partners behind the recruitment journey.
-          </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '640px' }}>
-            Give candidates and stakeholders a direct path to the partner experience so they can
-            see the organizations, brands, or teams represented in this recruitment showcase.
-          </p>
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'flex-start' }}>
-          <Link to="/partners" style={shellStyles.primaryButton}>
-            Explore hiring partners
-          </Link>
         </div>
       </SurfaceCard>
 
@@ -392,25 +254,14 @@ function Home() {
       >
         <span style={{ color: '#93c5fd', fontWeight: 700 }}>Ready to continue?</span>
         <h2 style={{ margin: 0, fontSize: '1.9rem' }}>
-          Move from interest to action with a clear recruitment journey.
+          Choose the next step that matches where you are in the recruitment journey.
         </h2>
         <p style={{ margin: 0, maxWidth: '720px', lineHeight: 1.7, color: tokens.colors.darkText }}>
-          Candidates can begin with sign-up, explore hiring partners, or use the contact page for
-          follow-up. This section is intentionally simple so future teams can swap in
-          campaign-specific calls to action.
+          Create a profile if you are ready to apply, review partners if you want more context, or contact the recruitment team if you need support before moving forward.
         </p>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-          <Link
-            to="/signup"
-            style={{
-              ...shellStyles.primaryButton,
-              backgroundColor: '#ffffff',
-              color: tokens.colors.text,
-              borderColor: '#ffffff',
-              boxShadow: 'none',
-            }}
-          >
-            Create candidate account
+          <Link to="/signup" style={shellStyles.primaryButton}>
+            Create your profile
           </Link>
           <Link
             to="/partners"
@@ -418,21 +269,10 @@ function Home() {
               ...shellStyles.secondaryButton,
               backgroundColor: 'transparent',
               color: '#ffffff',
-              border: '1px solid rgba(255, 255, 255, 0.35)',
+              border: '1px solid rgba(191, 219, 254, 0.45)',
             }}
           >
-            Explore hiring partners
-          </Link>
-          <Link
-            to="/contact-us"
-            style={{
-              ...shellStyles.secondaryButton,
-              backgroundColor: 'transparent',
-              color: '#ffffff',
-              border: '1px solid rgba(255, 255, 255, 0.35)',
-            }}
-          >
-            Ask a recruitment question
+            Explore partners
           </Link>
         </div>
       </SurfaceCard>

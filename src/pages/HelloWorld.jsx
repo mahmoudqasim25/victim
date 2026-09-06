@@ -1,139 +1,127 @@
-const pageStyle = {
-  width: '100%',
-  minHeight: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  padding: '24px 16px',
-  boxSizing: 'border-box',
-  background: 'linear-gradient(180deg, #eff6ff 0%, #ffffff 100%)',
-};
+import { Link } from 'react-router-dom'
+import PageShell, { MutedCard, PageIntro, SurfaceCard } from '../components/PageShell'
+import { shellStyles, tokens } from '../components/designSystem'
 
-const cardStyle = {
-  width: '100%',
-  maxWidth: '760px',
-  padding: 'clamp(24px, 4vw, 40px)',
-  border: '1px solid #bfdbfe',
-  borderRadius: '20px',
-  backgroundColor: '#ffffff',
-  boxShadow: '0 18px 40px rgba(29, 78, 216, 0.12)',
-  boxSizing: 'border-box',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '20px',
-};
-
-const badgeStyle = {
-  alignSelf: 'flex-start',
-  backgroundColor: '#dbeafe',
-  color: '#1d4ed8',
-  borderRadius: '999px',
-  padding: '8px 14px',
-  fontSize: '0.85rem',
-  fontWeight: 700,
-  letterSpacing: '0.02em',
-};
-
-const headingStyle = {
-  margin: 0,
-  color: '#0f172a',
-  fontSize: 'clamp(2rem, 5vw, 3.25rem)',
-  lineHeight: 1.1,
-};
-
-const bodyStyle = {
-  margin: 0,
-  color: '#475569',
-  lineHeight: '1.7',
-  fontSize: '1rem',
-};
-
-const featureGridStyle = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-  gap: '12px',
-};
-
-const featureCardStyle = {
-  border: '1px solid #dbeafe',
-  borderRadius: '14px',
-  padding: '16px',
-  backgroundColor: '#f8fbff',
-};
-
-const featureTitleStyle = {
-  margin: '0 0 8px',
-  color: '#1e3a8a',
-  fontSize: '1rem',
-};
-
-const ctaStyle = {
-  alignSelf: 'flex-start',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minHeight: '44px',
-  padding: '10px 18px',
-  borderRadius: '999px',
-  backgroundColor: '#1d4ed8',
-  color: '#ffffff',
-  fontWeight: 600,
-  textDecoration: 'none',
-};
-
-const featureItems = [
+const helloHighlights = [
   {
-    title: 'Clear greeting',
-    description: 'A simple, polished message keeps the page easy to review at a glance.',
+    title: 'Shared public shell',
+    description: 'This supporting page now uses the same card hierarchy, spacing rhythm, and responsive layout approach as the rest of the candidate-facing journey.',
   },
   {
-    title: 'Responsive layout',
-    description: 'The card scales comfortably from narrow mobile screens to wider desktop views.',
+    title: 'Clear business purpose',
+    description: 'Instead of placeholder-heavy content, the page explains how the public experience supports recruitment discovery and candidate communication.',
   },
   {
-    title: 'No backend required',
-    description: 'Everything on this route is static, so it renders without fetching any data.',
+    title: 'Aligned messaging',
+    description: 'The tone, structure, and calls to action now match the updated home, partners, and contact pages.',
   },
-];
+]
 
-/**
- * Renders a standalone Hello World review page using the app's existing recruitment styling cues.
- */
+const aiGuidance = [
+  'AI assistance can help prepare summaries or draft support content for recruiters.',
+  'AI assistance should always be reviewed by people before it is shared with candidates.',
+  'AI assistance does not replace recruiter judgment, candidate conversations, or final hiring decisions.',
+]
+
 function HelloWorld() {
   return (
-    <main style={pageStyle}>
-      <section style={cardStyle} aria-labelledby="hello-world-heading">
-        <span style={badgeStyle}>Recruitment experience preview</span>
-        <header style={{ display: 'grid', gap: '12px' }}>
-          <h1 id="hello-world-heading" style={headingStyle}>
-            Hello World
-          </h1>
-          <p style={bodyStyle}>
-            Welcome to a focused review page that highlights a clean, accessible Hello World
-            experience with the app&apos;s familiar blue-and-white recruitment styling.
-          </p>
-        </header>
+    <PageShell>
+      <SurfaceCard
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '24px',
+          alignItems: 'center',
+          background:
+            'linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0.96) 55%, rgba(14, 165, 233, 0.08) 100%)',
+        }}
+      >
+        <PageIntro
+          eyebrow="Hello"
+          title="A simple supporting page, aligned to the redesigned recruitment journey."
+          description="This route now acts as a lightweight orientation page inside the same public shell, reinforcing the updated information architecture and candidate-friendly messaging used across the landing experience."
+        />
 
-        <div style={featureGridStyle}>
-          {featureItems.map((item) => (
-            <article key={item.title} style={featureCardStyle}>
-              <h2 style={featureTitleStyle}>{item.title}</h2>
-              <p style={bodyStyle}>{item.description}</p>
-            </article>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+          <Link to="/" style={shellStyles.primaryButton}>
+            Return home
+          </Link>
+          <Link to="/contact-us" style={shellStyles.secondaryButton}>
+            Contact support
+          </Link>
+        </div>
+      </SurfaceCard>
+
+      <SurfaceCard>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
+          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
+            What this page now communicates
+          </h2>
+          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
+            Supporting pages should still help candidates understand the platform, even when they are not the primary conversion destination.
+          </p>
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: '16px',
+          }}
+        >
+          {helloHighlights.map((item) => (
+            <MutedCard key={item.title}>
+              <h3 style={{ margin: 0, fontSize: '1.15rem', color: tokens.colors.text }}>{item.title}</h3>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.description}</p>
+            </MutedCard>
           ))}
         </div>
+      </SurfaceCard>
 
-        <p style={bodyStyle}>
-          This page is intentionally lightweight and self-contained, making it easy to review the
-          route without depending on authentication flows, live services, or placeholder workflow
-          content.
+      <SurfaceCard
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(239, 246, 255, 0.95) 0%, rgba(255, 255, 255, 1) 100%)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '18px',
+        }}
+      >
+        <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>AI assistance framing</span>
+        <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
+          Any AI mention on public pages should stay clearly framed as assistance.
+        </h2>
+        <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '820px' }}>
+          This page mirrors the same guidance used elsewhere in the public journey so candidates receive consistent expectations wherever AI support is mentioned.
         </p>
-
-        <a href="/" style={ctaStyle} aria-label="Return to the home page">
-          Return home
-        </a>
-      </section>
-    </main>
-  );
+        <div
+          style={{
+            margin: 0,
+            color: tokens.colors.warningText,
+            backgroundColor: tokens.colors.warningSurface,
+            border: `1px solid ${tokens.colors.warningBorder}`,
+            borderRadius: tokens.radii.sm,
+            padding: '14px 16px',
+            lineHeight: 1.6,
+          }}
+        >
+          AI assistance may support drafting and organization, but it is limited. It does not replace human review, direct recruiter communication, or final hiring decisions.
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '16px',
+          }}
+        >
+          {aiGuidance.map((item) => (
+            <MutedCard key={item}>
+              <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item}</p>
+            </MutedCard>
+          ))}
+        </div>
+      </SurfaceCard>
+    </PageShell>
+  )
 }
 
-export default HelloWorld;
+export default HelloWorld
