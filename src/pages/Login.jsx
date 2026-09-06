@@ -1,33 +1,10 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import AuthFormCard from '../components/AuthFormCard';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
+import AuthFormCard from '../components/AuthFormCard'
+import { shellStyles, tokens } from '../components/designSystem'
 
 const authFormStyles = {
-  page: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '20px',
-  },
-  card: {
-    width: '100%',
-    maxWidth: '420px',
-    padding: '32px',
-    border: '1px solid #d1d5db',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-    backgroundColor: '#ffffff',
-  },
-  heading: {
-    margin: '0 0 8px',
-    textAlign: 'center',
-  },
-  description: {
-    margin: '0 0 24px',
-    textAlign: 'center',
-    color: '#4b5563',
-  },
   form: {
     display: 'flex',
     flexDirection: 'column',
@@ -40,96 +17,91 @@ const authFormStyles = {
     textAlign: 'left',
   },
   label: {
-    fontWeight: '600',
-    color: '#111827',
+    fontWeight: 600,
+    color: tokens.colors.text,
   },
   input: {
-    padding: '12px',
-    border: '1px solid #9ca3af',
-    borderRadius: '8px',
+    padding: '12px 14px',
+    border: `1px solid ${tokens.colors.border}`,
+    borderRadius: tokens.radii.xs,
     fontSize: '16px',
+    color: tokens.colors.text,
+    backgroundColor: tokens.colors.surface,
   },
   errorText: {
     margin: 0,
-    color: '#b91c1c',
+    color: tokens.colors.danger,
     fontSize: '14px',
   },
   button: {
-    padding: '12px',
+    ...shellStyles.primaryButton,
+    width: '100%',
     border: 'none',
-    borderRadius: '8px',
-    backgroundColor: '#2563eb',
-    color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: '600',
     cursor: 'pointer',
   },
   disabledButton: {
-    padding: '12px',
-    border: 'none',
-    borderRadius: '8px',
-    backgroundColor: '#93c5fd',
-    color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: '600',
+    ...shellStyles.primaryButton,
+    width: '100%',
     cursor: 'not-allowed',
+    opacity: 0.65,
+    boxShadow: 'none',
   },
-};
+}
 
-const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
+const validateEmail = (email) => /\S+@\S+\.\S+/.test(email)
 
 function Login() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
-  const [authError, setAuthError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate()
+  const { login } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({})
+  const [authError, setAuthError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const nextErrors = {};
-    const trimmedEmail = email.trim();
+    const nextErrors = {}
+    const trimmedEmail = email.trim()
 
     if (!trimmedEmail) {
-      nextErrors.email = 'Please enter your email address.';
+      nextErrors.email = 'Please enter your email address.'
     } else if (!validateEmail(trimmedEmail)) {
-      nextErrors.email = 'Please enter a valid email address.';
+      nextErrors.email = 'Please enter a valid email address.'
     }
 
     if (!password) {
-      nextErrors.password = 'Please enter your password.';
+      nextErrors.password = 'Please enter your password.'
     }
 
-    setErrors(nextErrors);
-    setAuthError('');
+    setErrors(nextErrors)
+    setAuthError('')
 
     if (Object.keys(nextErrors).length > 0) {
-      return;
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
-      const result = await login(trimmedEmail, password);
+      const result = await login(trimmedEmail, password)
 
       if (result?.error) {
-        setAuthError('Unable to sign in with those credentials. Please try again.');
-        return;
+        setAuthError('Unable to sign in with those credentials. Please try again.')
+        return
       }
 
-      navigate('/');
+      navigate('/')
     } catch {
-      setAuthError('Unable to sign in right now. Please try again in a moment.');
+      setAuthError('Unable to sign in right now. Please try again in a moment.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
-    <AuthFormCard title="Log in" description="Enter your email and password to continue." styles={authFormStyles}>
+    <AuthFormCard title="Candidate log in" description="Enter your email and password to continue.">
       <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate>
         <div style={authFormStyles.fieldGroup}>
           <label htmlFor="email" style={authFormStyles.label}>
@@ -186,7 +158,7 @@ function Login() {
         </button>
       </form>
     </AuthFormCard>
-  );
+  )
 }
 
-export default Login;
+export default Login
