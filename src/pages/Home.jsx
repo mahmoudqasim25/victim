@@ -62,6 +62,64 @@ const featuredTracks = [
   },
 ];
 
+const aiManagedServiceIntro = {
+  eyebrow: 'Illustrative service model',
+  title: 'How AI managed our service',
+  description:
+    'This sample section shows how AI can support a recruitment service by organizing intake details, surfacing recruiter prompts, and keeping candidate communications consistent. It is illustrative content only and does not describe live automation, verified client outcomes, or autonomous hiring decisions.',
+  disclaimer:
+    'Illustrative example only: the workflow below is a reusable content layout for future service messaging and should not be read as a live product claim.',
+  callout:
+    'Why AI was used: to help recruiters prepare faster, keep service updates consistent, and give teams a clearer view of candidate support tasks while people remain in control of decisions.',
+};
+
+const aiManagedServiceHighlights = [
+  {
+    title: 'Structured intake support',
+    description:
+      'AI can help summarize role requirements and candidate preferences so recruitment teams start each search with a clearer brief.',
+  },
+  {
+    title: 'Recruiter-ready recommendations',
+    description:
+      'Illustrative prompts can help recruiters prepare outreach ideas, follow-up reminders, and interview coordination notes before they respond.',
+  },
+  {
+    title: 'Consistent service updates',
+    description:
+      'Sample workflows show how AI-assisted drafts may keep status updates, FAQs, and next-step messages aligned across the recruitment journey.',
+  },
+  {
+    title: 'Priority visibility for teams',
+    description:
+      'Business users can review example dashboards that group open actions, candidate questions, and service handoffs in one place.',
+  },
+];
+
+const aiManagedServiceBenefits = [
+  'Supports recruiters with faster preparation for candidate conversations.',
+  'Helps operations teams keep service steps documented and easier to review.',
+  'Creates a repeatable layout for future recruitment copy updates without redesigning the page.',
+];
+
+const aiManagedServiceOutcomes = [
+  {
+    value: 'Sample: 1 shared queue',
+    label: 'Illustrative service view where recruiter tasks, candidate questions, and follow-ups appear together.',
+  },
+  {
+    value: 'Illustrative: 3 support moments',
+    label: 'Example touchpoints covering intake preparation, communication drafting, and recruiter handoff support.',
+  },
+  {
+    value: 'Sample: weekly summary',
+    label: 'Placeholder reporting format that could help business stakeholders review service activity without implying live metrics.',
+  },
+];
+
+const aiManagedServiceSummary =
+  'In this illustrative model, AI acts as a support layer within the recruitment service, helping teams organize information and prepare next steps while people remain responsible for communication, review, and hiring decisions.';
+
 const sectionStyle = {
   backgroundColor: '#ffffff',
   border: '1px solid #dbe4f0',
@@ -252,7 +310,162 @@ function Home() {
           </div>
         </section>
 
+        <section
+          style={{
+            ...sectionStyle,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '24px',
+            background:
+              'linear-gradient(180deg, rgba(239, 246, 255, 0.95) 0%, rgba(255, 255, 255, 1) 100%)',
+          }}
+        >
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '20px',
+              alignItems: 'start',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <span style={{ color: '#2563eb', fontWeight: 700 }}>{aiManagedServiceIntro.eyebrow}</span>
+              <h2 style={{ margin: 0, fontSize: '1.8rem', color: '#0f172a' }}>
+                {aiManagedServiceIntro.title}
+              </h2>
+              <p style={{ margin: 0, color: '#475569', lineHeight: 1.7, maxWidth: '860px' }}>
+                {aiManagedServiceIntro.description}
+              </p>
+            </div>
+
+            <aside
+              aria-label="Why AI was used"
+              style={{
+                backgroundColor: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                borderRadius: '20px',
+                padding: '20px 22px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                boxShadow: '0 12px 30px rgba(37, 99, 235, 0.08)',
+              }}
+            >
+              <span style={{ color: '#1d4ed8', fontWeight: 700 }}>Why AI was used</span>
+              <p style={{ margin: 0, color: '#1e3a8a', lineHeight: 1.7 }}>
+                {aiManagedServiceIntro.callout}
+              </p>
+            </aside>
+          </div>
+
+          <p
+            style={{
+              margin: 0,
+              color: '#92400e',
+              backgroundColor: '#fff7ed',
+              border: '1px solid #fed7aa',
+              borderRadius: '16px',
+              padding: '14px 16px',
+              lineHeight: 1.6,
+            }}
+          >
+            {aiManagedServiceIntro.disclaimer}
+          </p>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '16px',
+            }}
+          >
+            {aiManagedServiceHighlights.map((item, index) => (
+              <div key={item.title} style={{ ...cardStyle, backgroundColor: '#ffffff' }}>
+                <span style={{ color: '#2563eb', fontWeight: 700 }}>Service highlight {index + 1}</span>
+                <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#0f172a' }}>{item.title}</h3>
+                <p style={{ margin: 0, color: '#475569', lineHeight: 1.7 }}>{item.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '16px',
+            }}
+          >
+            <div style={{ ...cardStyle, backgroundColor: '#ffffff' }}>
+              <span style={{ color: '#2563eb', fontWeight: 700 }}>Business-friendly benefits</span>
+              <ul style={{ margin: 0, paddingLeft: '20px', color: '#475569', lineHeight: 1.8 }}>
+                {aiManagedServiceBenefits.map((benefit) => (
+                  <li key={benefit}>{benefit}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div style={{ ...cardStyle, gap: '16px', backgroundColor: '#ffffff' }}>
+              <span style={{ color: '#2563eb', fontWeight: 700 }}>Sample outcomes</span>
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+                  gap: '12px',
+                }}
+              >
+                {aiManagedServiceOutcomes.map((outcome) => (
+                  <div
+                    key={outcome.value}
+                    style={{
+                      backgroundColor: '#f8fbff',
+                      border: '1px solid #dbe4f0',
+                      borderRadius: '16px',
+                      padding: '16px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px',
+                    }}
+                  >
+                    <strong style={{ color: '#0f172a' }}>{outcome.value}</strong>
+                    <p style={{ margin: 0, color: '#475569', lineHeight: 1.6 }}>{outcome.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div
+            style={{
+              backgroundColor: '#eff6ff',
+              border: '1px solid #bfdbfe',
+              borderRadius: '20px',
+              padding: '20px 24px',
+            }}
+          >
+            <h3 style={{ margin: 0, color: '#1d4ed8', fontSize: '1rem' }}>Closing summary</h3>
+            <p style={{ margin: '10px 0 0', color: '#1e293b', lineHeight: 1.7, maxWidth: '900px' }}>
+              {aiManagedServiceSummary}
+            </p>
+          </div>
+        </section>
+
         <section style={sectionStyle}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+              marginBottom: '24px',
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: '1.8rem', color: '#0f172a' }}>
+              Candidate journey at a glance
+            </h2>
+            <p style={{ margin: 0, color: '#475569', lineHeight: 1.7 }}>
+              This simple process layout keeps the recruitment path readable while preserving the
+              primary calls to action above and below.
+            </p>
+          </div>
           <div
             style={{
               display: 'grid',
@@ -263,7 +476,7 @@ function Home() {
             {processSteps.map((step, index) => (
               <div key={step.title} style={cardStyle}>
                 <span style={{ color: '#2563eb', fontWeight: 700 }}>Step {index + 1}</span>
-                <h2 style={{ margin: 0, fontSize: '1.25rem', color: '#0f172a' }}>{step.title}</h2>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#0f172a' }}>{step.title}</h3>
                 <p style={{ margin: 0, color: '#475569', lineHeight: 1.7 }}>{step.description}</p>
               </div>
             ))}
