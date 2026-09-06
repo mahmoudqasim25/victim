@@ -69,6 +69,8 @@ const aiManagedServiceIntro = {
     'This sample section shows how AI can support a recruitment service by organizing intake details, surfacing recruiter prompts, and keeping candidate communications consistent. It is illustrative content only and does not describe live automation, verified client outcomes, or autonomous hiring decisions.',
   disclaimer:
     'Illustrative example only: the workflow below is a reusable content layout for future service messaging and should not be read as a live product claim.',
+  callout:
+    'Why AI was used: to help recruiters prepare faster, keep service updates consistent, and give teams a clearer view of candidate support tasks while people remain in control of decisions.',
 };
 
 const aiManagedServiceHighlights = [
@@ -314,41 +316,72 @@ function Home() {
             display: 'flex',
             flexDirection: 'column',
             gap: '24px',
+            background:
+              'linear-gradient(180deg, rgba(239, 246, 255, 0.95) 0%, rgba(255, 255, 255, 1) 100%)',
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <span style={{ color: '#2563eb', fontWeight: 700 }}>{aiManagedServiceIntro.eyebrow}</span>
-            <h2 style={{ margin: 0, fontSize: '1.8rem', color: '#0f172a' }}>
-              {aiManagedServiceIntro.title}
-            </h2>
-            <p style={{ margin: 0, color: '#475569', lineHeight: 1.7, maxWidth: '860px' }}>
-              {aiManagedServiceIntro.description}
-            </p>
-            <p
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '20px',
+              alignItems: 'start',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <span style={{ color: '#2563eb', fontWeight: 700 }}>{aiManagedServiceIntro.eyebrow}</span>
+              <h2 style={{ margin: 0, fontSize: '1.8rem', color: '#0f172a' }}>
+                {aiManagedServiceIntro.title}
+              </h2>
+              <p style={{ margin: 0, color: '#475569', lineHeight: 1.7, maxWidth: '860px' }}>
+                {aiManagedServiceIntro.description}
+              </p>
+            </div>
+
+            <aside
+              aria-label="Why AI was used"
               style={{
-                margin: 0,
-                color: '#92400e',
-                backgroundColor: '#fff7ed',
-                border: '1px solid #fed7aa',
-                borderRadius: '16px',
-                padding: '14px 16px',
-                lineHeight: 1.6,
+                backgroundColor: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                borderRadius: '20px',
+                padding: '20px 22px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                boxShadow: '0 12px 30px rgba(37, 99, 235, 0.08)',
               }}
             >
-              {aiManagedServiceIntro.disclaimer}
-            </p>
+              <span style={{ color: '#1d4ed8', fontWeight: 700 }}>Why AI was used</span>
+              <p style={{ margin: 0, color: '#1e3a8a', lineHeight: 1.7 }}>
+                {aiManagedServiceIntro.callout}
+              </p>
+            </aside>
           </div>
+
+          <p
+            style={{
+              margin: 0,
+              color: '#92400e',
+              backgroundColor: '#fff7ed',
+              border: '1px solid #fed7aa',
+              borderRadius: '16px',
+              padding: '14px 16px',
+              lineHeight: 1.6,
+            }}
+          >
+            {aiManagedServiceIntro.disclaimer}
+          </p>
 
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
               gap: '16px',
             }}
           >
-            {aiManagedServiceHighlights.map((item) => (
-              <div key={item.title} style={cardStyle}>
-                <span style={{ color: '#2563eb', fontWeight: 700 }}>Service highlight</span>
+            {aiManagedServiceHighlights.map((item, index) => (
+              <div key={item.title} style={{ ...cardStyle, backgroundColor: '#ffffff' }}>
+                <span style={{ color: '#2563eb', fontWeight: 700 }}>Service highlight {index + 1}</span>
                 <h3 style={{ margin: 0, fontSize: '1.15rem', color: '#0f172a' }}>{item.title}</h3>
                 <p style={{ margin: 0, color: '#475569', lineHeight: 1.7 }}>{item.description}</p>
               </div>
@@ -362,7 +395,7 @@ function Home() {
               gap: '16px',
             }}
           >
-            <div style={cardStyle}>
+            <div style={{ ...cardStyle, backgroundColor: '#ffffff' }}>
               <span style={{ color: '#2563eb', fontWeight: 700 }}>Business-friendly benefits</span>
               <ul style={{ margin: 0, paddingLeft: '20px', color: '#475569', lineHeight: 1.8 }}>
                 {aiManagedServiceBenefits.map((benefit) => (
@@ -371,7 +404,7 @@ function Home() {
               </ul>
             </div>
 
-            <div style={{ ...cardStyle, gap: '16px' }}>
+            <div style={{ ...cardStyle, gap: '16px', backgroundColor: '#ffffff' }}>
               <span style={{ color: '#2563eb', fontWeight: 700 }}>Sample outcomes</span>
               <div
                 style={{
@@ -384,7 +417,7 @@ function Home() {
                   <div
                     key={outcome.value}
                     style={{
-                      backgroundColor: '#ffffff',
+                      backgroundColor: '#f8fbff',
                       border: '1px solid #dbe4f0',
                       borderRadius: '16px',
                       padding: '16px',
@@ -409,7 +442,7 @@ function Home() {
               padding: '20px 24px',
             }}
           >
-            <span style={{ color: '#1d4ed8', fontWeight: 700 }}>Closing summary</span>
+            <h3 style={{ margin: 0, color: '#1d4ed8', fontSize: '1rem' }}>Closing summary</h3>
             <p style={{ margin: '10px 0 0', color: '#1e293b', lineHeight: 1.7, maxWidth: '900px' }}>
               {aiManagedServiceSummary}
             </p>
@@ -417,6 +450,22 @@ function Home() {
         </section>
 
         <section style={sectionStyle}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px',
+              marginBottom: '24px',
+            }}
+          >
+            <h2 style={{ margin: 0, fontSize: '1.8rem', color: '#0f172a' }}>
+              Candidate journey at a glance
+            </h2>
+            <p style={{ margin: 0, color: '#475569', lineHeight: 1.7 }}>
+              This simple process layout keeps the recruitment path readable while preserving the
+              primary calls to action above and below.
+            </p>
+          </div>
           <div
             style={{
               display: 'grid',
@@ -427,7 +476,7 @@ function Home() {
             {processSteps.map((step, index) => (
               <div key={step.title} style={cardStyle}>
                 <span style={{ color: '#2563eb', fontWeight: 700 }}>Step {index + 1}</span>
-                <h2 style={{ margin: 0, fontSize: '1.25rem', color: '#0f172a' }}>{step.title}</h2>
+                <h3 style={{ margin: 0, fontSize: '1.25rem', color: '#0f172a' }}>{step.title}</h3>
                 <p style={{ margin: 0, color: '#475569', lineHeight: 1.7 }}>{step.description}</p>
               </div>
             ))}
