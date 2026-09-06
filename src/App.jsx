@@ -28,7 +28,7 @@ function AppLayout() {
   return (
     <div style={shellStyles.appShell}>
       <Navbar />
-      <main style={shellStyles.shellFrame}>
+      <main id="main-content" style={shellStyles.shellFrame} tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<HelloWorld />} />

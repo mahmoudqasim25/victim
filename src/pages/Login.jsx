@@ -32,10 +32,11 @@ const authFormStyles = {
     fontSize: '16px',
     color: tokens.colors.text,
     backgroundColor: tokens.colors.surface,
+    outlineOffset: '3px',
   },
   inputError: {
     borderColor: tokens.colors.danger,
-    boxShadow: `0 0 0 3px ${tokens.colors.warningSurface}`,
+    boxShadow: `0 0 0 3px ${tokens.colors.dangerSurface}`,
   },
   helperText: {
     margin: 0,
@@ -53,8 +54,13 @@ const authFormStyles = {
   },
   errorMessage: {
     color: tokens.colors.danger,
-    backgroundColor: '#fef2f2',
-    borderColor: '#fecaca',
+    backgroundColor: tokens.colors.dangerSurface,
+    borderColor: tokens.colors.dangerBorder,
+  },
+  successMessage: {
+    color: tokens.colors.success,
+    backgroundColor: tokens.colors.successSurface,
+    borderColor: tokens.colors.successBorder,
   },
   infoMessage: {
     color: tokens.colors.primaryStrong,
@@ -68,6 +74,7 @@ const authFormStyles = {
     cursor: 'pointer',
     minHeight: '48px',
     fontSize: '1rem',
+    outlineOffset: '3px',
   },
   disabledButton: {
     ...shellStyles.primaryButton,
@@ -77,6 +84,7 @@ const authFormStyles = {
     boxShadow: 'none',
     minHeight: '48px',
     fontSize: '1rem',
+    outlineOffset: '3px',
   },
   secondaryText: {
     margin: 0,
@@ -107,6 +115,7 @@ function Login() {
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({})
   const [authError, setAuthError] = useState('')
+  const [authSuccess, setAuthSuccess] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (event) => {
@@ -127,6 +136,7 @@ function Login() {
 
     setErrors(nextErrors)
     setAuthError('')
+    setAuthSuccess('')
 
     if (Object.keys(nextErrors).length > 0) {
       return
@@ -142,6 +152,7 @@ function Login() {
         return
       }
 
+      setAuthSuccess('Sign-in successful. Redirecting you to the recruitment overview now.')
       navigate('/')
     } catch {
       setAuthError('We could not sign you in right now. Please try again in a moment.')
@@ -159,15 +170,24 @@ function Login() {
       formDescription="Enter your account details to continue. Demo access is available with the current mock credentials."
       highlights={loginHighlights}
     >
-      <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate>
-        <div style={authFormStyles.statusStack}>
+      <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate aria-describedby="login-form-guidance">
+        <p id="login-form-guidance" style={authFormStyles.helperText}>
+          Required fields are labeled below, and any validation or sign-in feedback will appear before the form fields.
+        </p>
+
+        <div style={authFormStyles.statusStack} aria-live="polite">
           {authError ? (
             <p role="alert" style={{ ...authFormStyles.statusMessage, ...authFormStyles.errorMessage }}>
               {authError}
             </p>
           ) : null}
+          {authSuccess ? (
+            <p role="status" style={{ ...authFormStyles.statusMessage, ...authFormStyles.successMessage }}>
+              {authSuccess}
+            </p>
+          ) : null}
           {isSubmitting ? (
-            <p style={{ ...authFormStyles.statusMessage, ...authFormStyles.infoMessage }}>
+            <p role="status" style={{ ...authFormStyles.statusMessage, ...authFormStyles.infoMessage }}>
               Signing you in now. Please keep this window open while we confirm your access.
             </p>
           ) : null}
@@ -175,7 +195,7 @@ function Login() {
 
         <div style={authFormStyles.fieldGroup}>
           <label htmlFor="email" style={authFormStyles.label}>
-            Email
+            Email address
           </label>
           <input
             id="email"
@@ -237,6 +257,7 @@ function Login() {
           type="submit"
           style={isSubmitting ? authFormStyles.disabledButton : authFormStyles.button}
           disabled={isSubmitting}
+          aria-disabled={isSubmitting}
         >
           {isSubmitting ? 'Signing in...' : 'Log in to continue'}
         </button>

@@ -76,6 +76,8 @@ function getNavLinkStyle(isActive) {
     backgroundColor: isActive ? tokens.colors.primarySoft : 'transparent',
     border: `1px solid ${isActive ? tokens.colors.borderStrong : 'transparent'}`,
     boxSizing: 'border-box',
+    outlineOffset: '3px',
+    transition: 'background-color 160ms ease, color 160ms ease, border-color 160ms ease, box-shadow 160ms ease',
   }
 }
 
@@ -83,9 +85,13 @@ function Navbar() {
   const location = useLocation()
 
   return (
-    <nav style={navStyle}>
+    <nav style={navStyle} aria-label="Primary site navigation">
       <div style={navInnerStyle}>
-        <Link to="/" style={brandBlockStyle}>
+        <Link
+          to="/"
+          aria-label="FlairsTech Recruitment home"
+          style={{ ...brandBlockStyle, outlineOffset: '4px' }}
+        >
           <span style={{ color: tokens.colors.text, fontSize: '1.1rem', fontWeight: 800 }}>
             FlairsTech Recruitment
           </span>
