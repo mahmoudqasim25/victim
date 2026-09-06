@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import PageShell, { MutedCard, PageIntro, SurfaceCard } from '../components/PageShell'
+import PageShell, { MutedCard, PageIntro, SectionIntro, SurfaceCard } from '../components/PageShell'
 import { shellStyles, tokens } from '../components/designSystem'
 
 const fallbackImage =
@@ -105,8 +105,8 @@ function Partners() {
       >
         <PageIntro
           eyebrow="Hiring partners"
-          title="Explore the organisations and team environments behind the recruitment journey."
-          description="This page helps candidates understand who may be hiring, what kind of work environment to expect, and where fallback content appears when partner data is still being completed."
+          title="Compare the organisations, team environments, and hiring context behind each opportunity."
+          description="The refreshed partners route now mirrors the modern recruitment shell while keeping navigation, active state visibility, and resilient fallback content for incomplete partner records."
         />
 
         <div style={{ display: 'grid', gap: '14px' }}>
@@ -119,6 +119,15 @@ function Partners() {
       </SurfaceCard>
 
       <SurfaceCard>
+        <SectionIntro
+          title="Partner spotlight"
+          description="Move through the partner list to compare environments, working models, and available context before you apply."
+        >
+          <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>
+            Current spotlight: {activePartner.name}
+          </span>
+        </SectionIntro>
+
         <div
           style={{
             display: 'flex',
@@ -129,17 +138,18 @@ function Partners() {
             marginBottom: '24px',
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Partner spotlight</span>
-            <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-              Current spotlight: {activePartner.name}
-            </h2>
-            <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '720px' }}>
-              Move through the partner list to compare environments, working models, and available context before you apply.
+          <MutedCard style={{ flex: '1 1 320px', backgroundColor: tokens.colors.surface }}>
+            <span style={{ color: tokens.colors.text, fontWeight: 700 }}>Visible active state</span>
+            <p style={{ margin: '10px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+              The active partner remains highlighted in the selector list and mirrored in the spotlight content so candidates always know which organisation they are viewing.
             </p>
-          </div>
+          </MutedCard>
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            <button type="button" onClick={handlePrevious} style={shellStyles.secondaryButton}>
+            <button
+              type="button"
+              onClick={handlePrevious}
+              style={{ ...shellStyles.secondaryButton, cursor: 'pointer' }}
+            >
               Previous
             </button>
             <button
@@ -251,6 +261,7 @@ function Partners() {
                 key={partner.id}
                 type="button"
                 onClick={() => updateActiveIndex(index)}
+                aria-pressed={isActive}
                 style={{
                   borderRadius: tokens.radii.sm,
                   border: `1px solid ${isActive ? tokens.colors.borderStrong : tokens.colors.border}`,

@@ -1,26 +1,35 @@
+import { Link } from 'react-router-dom'
 import PageShell, { MutedCard, PageIntro, SectionIntro, SurfaceCard } from '../components/PageShell'
-import { tokens } from '../components/designSystem'
+import { shellStyles, tokens } from '../components/designSystem'
 
 const supportOptions = [
   {
     label: 'General recruitment support',
     value: 'recruitment@example.com',
     detail: 'Best for application questions, timelines, and next-step guidance.',
+    actionLabel: 'Email recruitment',
+    actionHref: 'mailto:recruitment@example.com',
   },
   {
     label: 'Candidate phone line',
     value: '+1 (555) 010-2040',
     detail: 'Use for urgent support during business hours when you need direct assistance.',
+    actionLabel: 'Call support',
+    actionHref: 'tel:+15550102040',
   },
   {
     label: 'Messaging support',
     value: '+1 (555) 010-2041',
     detail: 'Suitable for quick updates, reminders, and simple coordination requests.',
+    actionLabel: 'Send message',
+    actionHref: 'sms:+15550102041',
   },
   {
     label: 'Recruitment desk location',
     value: '250 Market Street, Suite 400, San Francisco, CA 94105, United States',
     detail: 'A sample office location shown for layout review and public journey planning.',
+    actionLabel: 'View branches',
+    actionHref: '#branch-coverage',
   },
 ]
 
@@ -91,21 +100,31 @@ function ContactUs() {
       >
         <PageIntro
           eyebrow="Recruitment support"
-          title="Get clear help through the channel that fits your question."
-          description="The contact page now presents support options in a cleaner hierarchy so candidates, partners, and internal teams can quickly understand how to reach recruitment support and what each channel is best for."
+          title="Reach the recruitment team through the contact path that matches your need."
+          description="The contact route now uses the refreshed public shell to present support methods, branch coverage, and next-step guidance in a clearer candidate-friendly layout."
         />
 
-        <MutedCard>
-          <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Support note</span>
-          <p style={{ margin: '10px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
-            Contact details shown here remain sample content for review. Replace them with approved live information before publishing to candidates.
-          </p>
-        </MutedCard>
+        <div style={{ display: 'grid', gap: '14px' }}>
+          <MutedCard>
+            <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Support note</span>
+            <p style={{ margin: '10px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+              Contact details shown here remain sample content for review. Replace them with approved live information before publishing to candidates.
+            </p>
+          </MutedCard>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+            <Link to="/partners" style={shellStyles.secondaryButton}>
+              Review partners
+            </Link>
+            <Link to="/hello" style={shellStyles.primaryButton}>
+              Candidate overview
+            </Link>
+          </div>
+        </div>
       </SurfaceCard>
 
       <SurfaceCard>
         <SectionIntro
-          title="Support options"
+          title="Contact methods"
           description="Choose the route that matches your need, whether you are preparing to apply, checking progress, or coordinating with the recruitment team."
         />
         <div style={gridStyle('240px')}>
@@ -113,7 +132,13 @@ function ContactUs() {
             <MutedCard key={item.label} style={{ backgroundColor: tokens.colors.surface }}>
               <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>{item.label}</span>
               <h3 style={{ margin: '8px 0 0', fontSize: '1.1rem', color: tokens.colors.text }}>{item.value}</h3>
-              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.detail}</p>
+              <p style={{ margin: '8px 0 0 16px', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.detail}</p>
+              <a
+                href={item.actionHref}
+                style={{ ...shellStyles.secondaryButton, marginTop: '16px', alignSelf: 'flex-start' }}
+              >
+                {item.actionLabel}
+              </a>
             </MutedCard>
           ))}
         </div>
@@ -134,7 +159,7 @@ function ContactUs() {
         </div>
       </SurfaceCard>
 
-      <SurfaceCard>
+      <SurfaceCard id="branch-coverage">
         <SectionIntro
           title="Regional branch coverage"
           description="These sample branch cards show how localized support can be presented in the same public shell and spacing system."

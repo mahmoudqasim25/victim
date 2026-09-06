@@ -1,19 +1,37 @@
 import { Link } from 'react-router-dom'
-import PageShell, { MutedCard, PageIntro, SurfaceCard } from '../components/PageShell'
+import PageShell, { MutedCard, PageIntro, SectionIntro, SurfaceCard } from '../components/PageShell'
 import { shellStyles, tokens } from '../components/designSystem'
 
 const helloHighlights = [
   {
+    title: 'Candidate orientation',
+    description:
+      'Use this route to explain how the recruitment experience works, what candidates can expect next, and where to go for support.',
+  },
+  {
     title: 'Shared public shell',
-    description: 'This supporting page now uses the same card hierarchy, spacing rhythm, and responsive layout approach as the rest of the candidate-facing journey.',
+    description:
+      'The page now follows the same heading scale, card hierarchy, spacing rhythm, and action styling used across the refreshed public journey.',
   },
   {
-    title: 'Clear business purpose',
-    description: 'Instead of placeholder-heavy content, the page explains how the public experience supports recruitment discovery and candidate communication.',
+    title: 'Consistent fallback guidance',
+    description:
+      'If a visitor lands here without context, the page still offers clear next steps back to open roles, partner information, and support channels.',
+  },
+]
+
+const candidateJourney = [
+  {
+    title: 'Discover opportunities',
+    description: 'Review hiring partners, role categories, and the type of team environment that matches your experience.',
   },
   {
-    title: 'Aligned messaging',
-    description: 'The tone, structure, and calls to action now match the updated home, partners, and contact pages.',
+    title: 'Prepare your application',
+    description: 'Gather your CV, availability, and any supporting details recruiters may need to assess fit quickly.',
+  },
+  {
+    title: 'Stay connected',
+    description: 'Use the contact route whenever you need timeline updates, accessibility support, or clarification on next steps.',
   },
 ]
 
@@ -37,30 +55,34 @@ function HelloWorld() {
         }}
       >
         <PageIntro
-          eyebrow="Hello"
-          title="A simple supporting page, aligned to the redesigned recruitment journey."
-          description="This route now acts as a lightweight orientation page inside the same public shell, reinforcing the updated information architecture and candidate-friendly messaging used across the landing experience."
+          eyebrow="Candidate hello"
+          title="Start with a clear view of how this recruitment experience supports your next move."
+          description="This route now acts as a lightweight orientation page for candidates who need context before applying, comparing partners, or reaching the recruitment team."
         />
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
-          <Link to="/" style={shellStyles.primaryButton}>
-            Return home
-          </Link>
-          <Link to="/contact-us" style={shellStyles.secondaryButton}>
-            Contact support
-          </Link>
+        <div style={{ display: 'grid', gap: '14px' }}>
+          <MutedCard>
+            <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>Why this page exists</span>
+            <p style={{ margin: '10px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+              It gives visitors a simple, recruitment-focused entry point instead of placeholder content, so every public route feels intentional and connected.
+            </p>
+          </MutedCard>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px' }}>
+            <Link to="/partners" style={shellStyles.primaryButton}>
+              Explore partners
+            </Link>
+            <Link to="/contact-us" style={shellStyles.secondaryButton}>
+              Contact recruitment
+            </Link>
+          </div>
         </div>
       </SurfaceCard>
 
       <SurfaceCard>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
-          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-            What this page now communicates
-          </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
-            Supporting pages should still help candidates understand the platform, even when they are not the primary conversion destination.
-          </p>
-        </div>
+        <SectionIntro
+          title="What candidates can do from here"
+          description="The refreshed hello route now reinforces the same business purpose and visual system used across the rest of the non-auth experience."
+        />
         <div
           style={{
             display: 'grid',
@@ -77,6 +99,27 @@ function HelloWorld() {
         </div>
       </SurfaceCard>
 
+      <SurfaceCard>
+        <SectionIntro
+          title="A simple recruitment journey"
+          description="Even a supporting route should help candidates understand the path from discovery to follow-up without sending them into a dead end."
+        />
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '16px',
+          }}
+        >
+          {candidateJourney.map((item) => (
+            <MutedCard key={item.title} style={{ backgroundColor: tokens.colors.surface }}>
+              <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>{item.title}</span>
+              <p style={{ margin: '10px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>{item.description}</p>
+            </MutedCard>
+          ))}
+        </div>
+      </SurfaceCard>
+
       <SurfaceCard
         style={{
           background:
@@ -86,13 +129,13 @@ function HelloWorld() {
           gap: '18px',
         }}
       >
-        <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>AI assistance framing</span>
-        <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-          Any AI mention on public pages should stay clearly framed as assistance.
-        </h2>
-        <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '820px' }}>
-          This page mirrors the same guidance used elsewhere in the public journey so candidates receive consistent expectations wherever AI support is mentioned.
-        </p>
+        <SectionIntro
+          title="AI assistance stays clearly framed"
+          description="Any mention of AI on public routes should remain supportive, transparent, and secondary to recruiter-led decision making."
+          style={{ marginBottom: 0 }}
+        >
+          <span style={{ color: tokens.colors.primary, fontWeight: 700 }}>AI assistance framing</span>
+        </SectionIntro>
         <div
           style={{
             margin: 0,
@@ -104,7 +147,7 @@ function HelloWorld() {
             lineHeight: 1.6,
           }}
         >
-          AI assistance may support drafting and organization, but it is limited. It does not replace human review, direct recruiter communication, or final hiring decisions.
+          AI assistance may support drafting and organization, but it does not replace human review, direct recruiter communication, or final hiring decisions.
         </div>
         <div
           style={{
