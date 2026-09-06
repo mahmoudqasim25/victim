@@ -7,48 +7,28 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ContactUs from './pages/ContactUs'
 import Partners from './pages/Partners'
-
-const appShellStyle = {
-  minHeight: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  backgroundColor: '#f8fafc'
-}
-
-const fullWidthContentStyle = {
-  flex: 1,
-  width: '100%'
-}
-
-const centeredContentStyle = {
-  flex: 1,
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center'
-}
+import { shellStyles } from './components/designSystem'
 
 const pageTitles = {
   '/': 'FlairsTech Recruitment Overview',
   '/hello': 'FlairsTech Recruitment Hello World Review',
   '/login': 'FlairsTech Recruitment Candidate Log In',
   '/signup': 'FlairsTech Recruitment Create Profile',
-  '/contact-us': 'FlairsTech Recruitment Contact',
-  '/partners': 'FlairsTech Recruitment Hiring Partners'
+  '/contact-us': 'FlairsTech Recruitment Contact Recruitment Team',
+  '/partners': 'FlairsTech Recruitment Hiring Partners Spotlight',
 }
 
 function AppLayout() {
   const location = useLocation()
-  const isFullWidthRoute = location.pathname === '/' || location.pathname === '/partners'
 
   useEffect(() => {
-    document.title = pageTitles[location.pathname] ?? 'FlairsTech Recruitment Hello World'
+    document.title = pageTitles[location.pathname] ?? 'FlairsTech Recruitment'
   }, [location.pathname])
 
   return (
-    <div style={appShellStyle}>
+    <div style={shellStyles.appShell}>
       <Navbar />
-      <main style={isFullWidthRoute ? fullWidthContentStyle : centeredContentStyle}>
+      <main id="main-content" style={shellStyles.shellFrame} tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hello" element={<HelloWorld />} />

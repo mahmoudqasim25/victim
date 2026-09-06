@@ -1,37 +1,19 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import AuthFormCard from '../components/AuthFormCard';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
+import AuthFormCard from '../components/AuthFormCard'
+import { shellStyles, tokens } from '../components/designSystem'
 
 const authFormStyles = {
-  page: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '20px',
-  },
-  card: {
-    width: '100%',
-    maxWidth: '420px',
-    padding: '32px',
-    border: '1px solid #d1d5db',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-    backgroundColor: '#ffffff',
-  },
-  heading: {
-    margin: '0 0 8px',
-    textAlign: 'center',
-  },
-  description: {
-    margin: '0 0 24px',
-    textAlign: 'center',
-    color: '#4b5563',
-  },
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    gap: '18px',
+  },
+  statusStack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
   },
   fieldGroup: {
     display: 'flex',
@@ -40,100 +22,180 @@ const authFormStyles = {
     textAlign: 'left',
   },
   label: {
-    fontWeight: '600',
-    color: '#111827',
+    fontWeight: 600,
+    color: tokens.colors.text,
   },
   input: {
-    padding: '12px',
-    border: '1px solid #9ca3af',
-    borderRadius: '8px',
+    padding: '12px 14px',
+    border: `1px solid ${tokens.colors.border}`,
+    borderRadius: tokens.radii.xs,
     fontSize: '16px',
+    color: tokens.colors.text,
+    backgroundColor: tokens.colors.surface,
+    outlineOffset: '3px',
   },
-  errorText: {
+  inputError: {
+    borderColor: tokens.colors.danger,
+    boxShadow: `0 0 0 3px ${tokens.colors.dangerSurface}`,
+  },
+  helperText: {
     margin: 0,
-    color: '#b91c1c',
+    color: tokens.colors.textSubtle,
     fontSize: '14px',
+    lineHeight: 1.5,
+  },
+  statusMessage: {
+    margin: 0,
+    padding: '12px 14px',
+    borderRadius: tokens.radii.sm,
+    fontSize: '14px',
+    lineHeight: 1.5,
+    border: `1px solid ${tokens.colors.border}`,
+  },
+  errorMessage: {
+    color: tokens.colors.danger,
+    backgroundColor: tokens.colors.dangerSurface,
+    borderColor: tokens.colors.dangerBorder,
+  },
+  successMessage: {
+    color: tokens.colors.success,
+    backgroundColor: tokens.colors.successSurface,
+    borderColor: tokens.colors.successBorder,
+  },
+  infoMessage: {
+    color: tokens.colors.primaryStrong,
+    backgroundColor: tokens.colors.primarySoft,
+    borderColor: tokens.colors.borderStrong,
   },
   button: {
-    padding: '12px',
+    ...shellStyles.primaryButton,
+    width: '100%',
     border: 'none',
-    borderRadius: '8px',
-    backgroundColor: '#2563eb',
-    color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: '600',
     cursor: 'pointer',
+    minHeight: '48px',
+    fontSize: '1rem',
+    outlineOffset: '3px',
   },
   disabledButton: {
-    padding: '12px',
-    border: 'none',
-    borderRadius: '8px',
-    backgroundColor: '#93c5fd',
-    color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: '600',
+    ...shellStyles.primaryButton,
+    width: '100%',
     cursor: 'not-allowed',
+    opacity: 0.65,
+    boxShadow: 'none',
+    minHeight: '48px',
+    fontSize: '1rem',
+    outlineOffset: '3px',
   },
-};
+  secondaryText: {
+    margin: 0,
+    textAlign: 'center',
+    color: tokens.colors.textSubtle,
+    fontSize: '14px',
+    lineHeight: 1.6,
+  },
+}
 
-const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
+const validateEmail = (email) => /\S+@\S+\.\S+/.test(email)
+
+const loginHighlights = [
+  {
+    title: 'Track progress',
+    description: 'Review application activity, interview updates, and recruiter follow-ups in one place.',
+  },
+  {
+    title: 'Stay prepared',
+    description: 'Keep your candidate profile ready so you can respond quickly when opportunities move.',
+  },
+]
 
 function Login() {
-  const navigate = useNavigate();
-  const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({});
-  const [authError, setAuthError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate()
+  const { login } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({})
+  const [authError, setAuthError] = useState('')
+  const [authSuccess, setAuthSuccess] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const nextErrors = {};
-    const trimmedEmail = email.trim();
+    const nextErrors = {}
+    const trimmedEmail = email.trim()
 
     if (!trimmedEmail) {
-      nextErrors.email = 'Please enter your email address.';
+      nextErrors.email = 'Enter the email address you used for your candidate account.'
     } else if (!validateEmail(trimmedEmail)) {
-      nextErrors.email = 'Please enter a valid email address.';
+      nextErrors.email = 'Check the email format and try again.'
     }
 
     if (!password) {
-      nextErrors.password = 'Please enter your password.';
+      nextErrors.password = 'Enter your password to continue.'
     }
 
-    setErrors(nextErrors);
-    setAuthError('');
+    setErrors(nextErrors)
+    setAuthError('')
+    setAuthSuccess('')
 
     if (Object.keys(nextErrors).length > 0) {
-      return;
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
-      const result = await login(trimmedEmail, password);
+      const result = await login(trimmedEmail, password)
 
       if (result?.error) {
-        setAuthError('Unable to sign in with those credentials. Please try again.');
-        return;
+        setAuthError(result.error.message || 'We could not sign you in with those details.')
+        return
       }
 
-      navigate('/');
+      setAuthSuccess('Sign-in successful. Redirecting you to the recruitment overview now.')
+      navigate('/')
     } catch {
-      setAuthError('Unable to sign in right now. Please try again in a moment.');
+      setAuthError('We could not sign you in right now. Please try again in a moment.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
-    <AuthFormCard title="Log in" description="Enter your email and password to continue." styles={authFormStyles}>
-      <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate>
+    <AuthFormCard
+      currentView="login"
+      title="Access your candidate account"
+      description="Use the same professional sign-in flow across your recruitment experience to review applications, updates, and next steps."
+      formTitle="Log in"
+      formDescription="Enter your account details to continue. Demo access is available with the current mock credentials."
+      highlights={loginHighlights}
+    >
+      <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate aria-describedby="login-form-guidance">
+        <p id="login-form-guidance" style={authFormStyles.helperText}>
+          Required fields are labeled below, and any validation or sign-in feedback will appear before the form fields.
+        </p>
+
+        <div style={authFormStyles.statusStack} aria-live="polite">
+          {authError ? (
+            <p role="alert" style={{ ...authFormStyles.statusMessage, ...authFormStyles.errorMessage }}>
+              {authError}
+            </p>
+          ) : null}
+          {authSuccess ? (
+            <p role="status" style={{ ...authFormStyles.statusMessage, ...authFormStyles.successMessage }}>
+              {authSuccess}
+            </p>
+          ) : null}
+          {isSubmitting ? (
+            <p role="status" style={{ ...authFormStyles.statusMessage, ...authFormStyles.infoMessage }}>
+              Signing you in now. Please keep this window open while we confirm your access.
+            </p>
+          ) : null}
+        </div>
+
         <div style={authFormStyles.fieldGroup}>
           <label htmlFor="email" style={authFormStyles.label}>
-            Email
+            Email address
           </label>
           <input
             id="email"
@@ -142,12 +204,18 @@ function Login() {
             autoComplete="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            style={authFormStyles.input}
+            style={{
+              ...authFormStyles.input,
+              ...(errors.email ? authFormStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-describedby={errors.email ? 'email-error email-helper' : 'email-helper'}
           />
+          <p id="email-helper" style={authFormStyles.helperText}>
+            Use the same email address you registered with.
+          </p>
           {errors.email ? (
-            <p id="email-error" style={authFormStyles.errorText}>
+            <p id="email-error" role="alert" style={{ ...authFormStyles.statusMessage, ...authFormStyles.errorMessage }}>
               {errors.email}
             </p>
           ) : null}
@@ -164,29 +232,42 @@ function Login() {
             autoComplete="current-password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            style={authFormStyles.input}
+            style={{
+              ...authFormStyles.input,
+              ...(errors.password ? authFormStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.password)}
-            aria-describedby={errors.password ? 'password-error' : undefined}
+            aria-describedby={errors.password ? 'password-error password-helper' : 'password-helper'}
           />
+          <p id="password-helper" style={authFormStyles.helperText}>
+            For demo access, use the current mock password assigned to your test account.
+          </p>
           {errors.password ? (
-            <p id="password-error" style={authFormStyles.errorText}>
+            <p
+              id="password-error"
+              role="alert"
+              style={{ ...authFormStyles.statusMessage, ...authFormStyles.errorMessage }}
+            >
               {errors.password}
             </p>
           ) : null}
         </div>
 
-        {authError ? <p style={authFormStyles.errorText}>{authError}</p> : null}
-
         <button
           type="submit"
           style={isSubmitting ? authFormStyles.disabledButton : authFormStyles.button}
           disabled={isSubmitting}
+          aria-disabled={isSubmitting}
         >
-          {isSubmitting ? 'Signing in...' : 'Log in'}
+          {isSubmitting ? 'Signing in...' : 'Log in to continue'}
         </button>
+
+        <p style={authFormStyles.secondaryText}>
+          New here? Select Create profile above to set up your candidate account.
+        </p>
       </form>
     </AuthFormCard>
-  );
+  )
 }
 
-export default Login;
+export default Login

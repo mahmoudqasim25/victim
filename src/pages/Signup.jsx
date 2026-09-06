@@ -1,36 +1,19 @@
-import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
-import AuthFormCard from '../components/AuthFormCard';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
+import AuthFormCard from '../components/AuthFormCard'
+import { shellStyles, tokens } from '../components/designSystem'
 
-const authFormStyles = {
-  page: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    padding: '20px',
-  },
-  card: {
-    width: '100%',
-    maxWidth: '420px',
-    padding: '32px',
-    border: '1px solid #d1d5db',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-    backgroundColor: '#ffffff',
-  },
-  heading: {
-    margin: '0 0 8px',
-    textAlign: 'center',
-  },
-  description: {
-    margin: '0 0 24px',
-    textAlign: 'center',
-    color: '#4b5563',
-  },
+const signupStyles = {
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    gap: '18px',
+  },
+  statusStack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
   },
   fieldGroup: {
     display: 'flex',
@@ -39,50 +22,78 @@ const authFormStyles = {
     textAlign: 'left',
   },
   label: {
-    fontWeight: '600',
-    color: '#111827',
+    fontWeight: 600,
+    color: tokens.colors.text,
   },
   input: {
-    padding: '12px',
-    border: '1px solid #9ca3af',
-    borderRadius: '8px',
+    padding: '12px 14px',
+    border: `1px solid ${tokens.colors.border}`,
+    borderRadius: tokens.radii.xs,
     fontSize: '16px',
+    color: tokens.colors.text,
+    backgroundColor: tokens.colors.surface,
   },
-  errorText: {
-    margin: 0,
-    color: '#b91c1c',
-    fontSize: '14px',
+  inputError: {
+    borderColor: tokens.colors.danger,
+    boxShadow: `0 0 0 3px ${tokens.colors.warningSurface}`,
   },
-  successText: {
+  helperText: {
     margin: 0,
-    color: '#047857',
+    color: tokens.colors.textSubtle,
     fontSize: '14px',
+    lineHeight: 1.5,
+  },
+  statusMessage: {
+    margin: 0,
+    padding: '12px 14px',
+    borderRadius: tokens.radii.sm,
+    fontSize: '14px',
+    lineHeight: 1.5,
+    border: `1px solid ${tokens.colors.border}`,
+  },
+  errorMessage: {
+    color: tokens.colors.danger,
+    backgroundColor: '#fef2f2',
+    borderColor: '#fecaca',
+  },
+  successMessage: {
+    color: tokens.colors.success,
+    backgroundColor: '#ecfdf5',
+    borderColor: '#a7f3d0',
+  },
+  infoMessage: {
+    color: tokens.colors.primaryStrong,
+    backgroundColor: tokens.colors.primarySoft,
+    borderColor: tokens.colors.borderStrong,
   },
   button: {
-    padding: '12px',
+    ...shellStyles.primaryButton,
+    width: '100%',
     border: 'none',
-    borderRadius: '8px',
-    backgroundColor: '#2563eb',
-    color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: '600',
     cursor: 'pointer',
+    minHeight: '48px',
+    fontSize: '1rem',
   },
   disabledButton: {
-    padding: '12px',
-    border: 'none',
-    borderRadius: '8px',
-    backgroundColor: '#93c5fd',
-    color: '#ffffff',
-    fontSize: '16px',
-    fontWeight: '600',
+    ...shellStyles.primaryButton,
+    width: '100%',
     cursor: 'not-allowed',
+    opacity: 0.65,
+    boxShadow: 'none',
+    minHeight: '48px',
+    fontSize: '1rem',
   },
-};
+  secondaryText: {
+    margin: 0,
+    textAlign: 'center',
+    color: tokens.colors.textSubtle,
+    fontSize: '14px',
+    lineHeight: 1.6,
+  },
+}
 
-const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
-
-const validatePassword = (password) => password.length >= 8;
+const validateEmail = (email) => /\S+@\S+\.\S+/.test(email)
+const validatePassword = (password) => password.length >= 8
 
 const genderOptions = [
   { value: '', label: 'Select a gender' },
@@ -90,66 +101,78 @@ const genderOptions = [
   { value: 'man', label: 'Man' },
   { value: 'non-binary', label: 'Non-binary' },
   { value: 'prefer-not-to-say', label: 'Prefer not to say' },
-];
+]
+
+const signupHighlights = [
+  {
+    title: 'Create once',
+    description: 'Set up your candidate account with the current profile fields and return whenever roles progress.',
+  },
+  {
+    title: 'Stay informed',
+    description: 'Receive application-related updates through the email address tied to your account.',
+  },
+]
 
 function Signup() {
-  const { signup } = useAuth();
+  const navigate = useNavigate()
+  const { signup } = useAuth()
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
     password: '',
     gender: '',
-  });
-  const [errors, setErrors] = useState({});
-  const [submitError, setSubmitError] = useState('');
-  const [submitSuccess, setSubmitSuccess] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  })
+  const [errors, setErrors] = useState({})
+  const [submitError, setSubmitError] = useState('')
+  const [submitSuccess, setSubmitSuccess] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target
 
     setFormValues((currentValues) => ({
       ...currentValues,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const nextErrors = {};
-    const trimmedName = formValues.name.trim();
-    const trimmedEmail = formValues.email.trim();
+    const nextErrors = {}
+    const trimmedName = formValues.name.trim()
+    const trimmedEmail = formValues.email.trim()
 
     if (!trimmedName) {
-      nextErrors.name = 'Please enter your name.';
+      nextErrors.name = 'Enter your full name so recruiters know who is applying.'
     }
 
     if (!trimmedEmail) {
-      nextErrors.email = 'Please enter your email address.';
+      nextErrors.email = 'Enter an email address for account updates and sign-in.'
     } else if (!validateEmail(trimmedEmail)) {
-      nextErrors.email = 'Please enter a valid email address.';
+      nextErrors.email = 'Check the email format and try again.'
     }
 
     if (!formValues.password) {
-      nextErrors.password = 'Please create a password.';
+      nextErrors.password = 'Create a password with at least 8 characters.'
     } else if (!validatePassword(formValues.password)) {
-      nextErrors.password = 'Password must be at least 8 characters long.';
+      nextErrors.password = 'Your password must be at least 8 characters long.'
     }
 
     if (!formValues.gender) {
-      nextErrors.gender = 'Please select a gender.';
+      nextErrors.gender = 'Select the option that best matches you.'
     }
 
-    setErrors(nextErrors);
-    setSubmitError('');
-    setSubmitSuccess('');
+    setErrors(nextErrors)
+    setSubmitError('')
+    setSubmitSuccess('')
 
     if (Object.keys(nextErrors).length > 0) {
-      return;
+      return
     }
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     try {
       const result = await signup({
@@ -157,27 +180,53 @@ function Signup() {
         email: trimmedEmail,
         password: formValues.password,
         gender: formValues.gender,
-      });
+      })
 
       if (result?.error) {
-        setSubmitError(result.error.message);
-        return;
+        setSubmitError(result.error.message)
+        return
       }
 
-      setSubmitSuccess(result?.message || 'Account created successfully.');
+      setSubmitSuccess(result?.message || 'Account created successfully.')
+      navigate('/')
     } catch {
-      setSubmitError('We could not create your account right now. Please try again in a moment.');
+      setSubmitError('We could not create your account right now. Please try again in a moment.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   return (
-    <AuthFormCard title="Sign up" description="Enter your details to continue." styles={authFormStyles}>
-      <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate>
-        <div style={authFormStyles.fieldGroup}>
-          <label htmlFor="name" style={authFormStyles.label}>
-            Name
+    <AuthFormCard
+      currentView="signup"
+      title="Create your candidate account"
+      description="Start with the current profile details to manage applications, stay aligned with recruiters, and keep your hiring activity organized."
+      formTitle="Create profile"
+      formDescription="Complete the fields below to open your account. Guided help is optional and only explains the process."
+      highlights={signupHighlights}
+    >
+      <form style={signupStyles.form} onSubmit={handleSubmit} noValidate>
+        <div style={signupStyles.statusStack}>
+          {submitError ? (
+            <p role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
+              {submitError}
+            </p>
+          ) : null}
+          {submitSuccess ? (
+            <p role="status" style={{ ...signupStyles.statusMessage, ...signupStyles.successMessage }}>
+              {submitSuccess}
+            </p>
+          ) : null}
+          {isSubmitting ? (
+            <p style={{ ...signupStyles.statusMessage, ...signupStyles.infoMessage }}>
+              Creating your profile now. Please keep this window open while we save your details.
+            </p>
+          ) : null}
+        </div>
+
+        <div style={signupStyles.fieldGroup}>
+          <label htmlFor="name" style={signupStyles.label}>
+            Full name
           </label>
           <input
             id="name"
@@ -186,19 +235,25 @@ function Signup() {
             autoComplete="name"
             value={formValues.name}
             onChange={handleChange}
-            style={authFormStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.name ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.name)}
-            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-describedby={errors.name ? 'name-error name-helper' : 'name-helper'}
           />
+          <p id="name-helper" style={signupStyles.helperText}>
+            Enter the name you want associated with your applications.
+          </p>
           {errors.name ? (
-            <p id="name-error" style={authFormStyles.errorText}>
+            <p id="name-error" role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
               {errors.name}
             </p>
           ) : null}
         </div>
 
-        <div style={authFormStyles.fieldGroup}>
-          <label htmlFor="signup-email" style={authFormStyles.label}>
+        <div style={signupStyles.fieldGroup}>
+          <label htmlFor="signup-email" style={signupStyles.label}>
             Email
           </label>
           <input
@@ -208,19 +263,29 @@ function Signup() {
             autoComplete="email"
             value={formValues.email}
             onChange={handleChange}
-            style={authFormStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.email ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'signup-email-error' : undefined}
+            aria-describedby={errors.email ? 'signup-email-error signup-email-helper' : 'signup-email-helper'}
           />
+          <p id="signup-email-helper" style={signupStyles.helperText}>
+            We will use this for sign-in and important application updates.
+          </p>
           {errors.email ? (
-            <p id="signup-email-error" style={authFormStyles.errorText}>
+            <p
+              id="signup-email-error"
+              role="alert"
+              style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}
+            >
               {errors.email}
             </p>
           ) : null}
         </div>
 
-        <div style={authFormStyles.fieldGroup}>
-          <label htmlFor="signup-password" style={authFormStyles.label}>
+        <div style={signupStyles.fieldGroup}>
+          <label htmlFor="signup-password" style={signupStyles.label}>
             Password
           </label>
           <input
@@ -230,19 +295,29 @@ function Signup() {
             autoComplete="new-password"
             value={formValues.password}
             onChange={handleChange}
-            style={authFormStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.password ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.password)}
-            aria-describedby={errors.password ? 'signup-password-error' : undefined}
+            aria-describedby={errors.password ? 'signup-password-error helper-password' : 'helper-password'}
           />
+          <p id="helper-password" style={signupStyles.helperText}>
+            Use at least 8 characters. This password secures your account and does not affect hiring decisions.
+          </p>
           {errors.password ? (
-            <p id="signup-password-error" style={authFormStyles.errorText}>
+            <p
+              id="signup-password-error"
+              role="alert"
+              style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}
+            >
               {errors.password}
             </p>
           ) : null}
         </div>
 
-        <div style={authFormStyles.fieldGroup}>
-          <label htmlFor="gender" style={authFormStyles.label}>
+        <div style={signupStyles.fieldGroup}>
+          <label htmlFor="gender" style={signupStyles.label}>
             Gender
           </label>
           <select
@@ -250,9 +325,12 @@ function Signup() {
             name="gender"
             value={formValues.gender}
             onChange={handleChange}
-            style={authFormStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.gender ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.gender)}
-            aria-describedby={errors.gender ? 'gender-error' : undefined}
+            aria-describedby={errors.gender ? 'gender-error gender-helper' : 'gender-helper'}
           >
             {genderOptions.map((option) => (
               <option key={option.value || 'placeholder'} value={option.value}>
@@ -260,26 +338,30 @@ function Signup() {
               </option>
             ))}
           </select>
+          <p id="gender-helper" style={signupStyles.helperText}>
+            This field remains part of the current signup flow and completes your profile setup.
+          </p>
           {errors.gender ? (
-            <p id="gender-error" style={authFormStyles.errorText}>
+            <p id="gender-error" role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
               {errors.gender}
             </p>
           ) : null}
         </div>
 
-        {submitError ? <p style={authFormStyles.errorText}>{submitError}</p> : null}
-        {submitSuccess ? <p style={authFormStyles.successText}>{submitSuccess}</p> : null}
-
         <button
           type="submit"
-          style={isSubmitting ? authFormStyles.disabledButton : authFormStyles.button}
+          style={isSubmitting ? signupStyles.disabledButton : signupStyles.button}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Creating account...' : 'Sign up'}
+          {isSubmitting ? 'Creating profile...' : 'Create your profile'}
         </button>
+
+        <p style={signupStyles.secondaryText}>
+          Already have an account? Select Log in above to return to sign-in.
+        </p>
       </form>
     </AuthFormCard>
-  );
+  )
 }
 
-export default Signup;
+export default Signup
