@@ -7,6 +7,11 @@ const authCardStyles = {
     display: 'grid',
     gap: '20px',
   },
+  heroCard: {
+    display: 'grid',
+    gap: '24px',
+    padding: 'clamp(24px, 4vw, 36px)',
+  },
   header: {
     display: 'flex',
     flexDirection: 'column',
@@ -54,6 +59,52 @@ const authCardStyles = {
     backgroundColor: tokens.colors.primarySoft,
     border: `1px solid ${tokens.colors.borderStrong}`,
   },
+  highlights: {
+    display: 'grid',
+    gap: '12px',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+  },
+  highlightCard: {
+    padding: '16px',
+    borderRadius: tokens.radii.sm,
+    backgroundColor: tokens.colors.surfaceMuted,
+    border: `1px solid ${tokens.colors.border}`,
+    textAlign: 'left',
+  },
+  highlightTitle: {
+    margin: '0 0 6px',
+    color: tokens.colors.text,
+    fontSize: '0.95rem',
+  },
+  highlightText: {
+    margin: 0,
+    color: tokens.colors.textMuted,
+    lineHeight: 1.6,
+    fontSize: '0.92rem',
+  },
+  formCard: {
+    padding: 'clamp(24px, 4vw, 32px)',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+  },
+  formHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '8px',
+    textAlign: 'left',
+  },
+  formTitle: {
+    margin: 0,
+    color: tokens.colors.text,
+    fontSize: '1.25rem',
+  },
+  formDescription: {
+    margin: 0,
+    color: tokens.colors.textMuted,
+    lineHeight: 1.6,
+    fontSize: '0.95rem',
+  },
   supportCard: {
     display: 'flex',
     flexDirection: 'column',
@@ -82,18 +133,19 @@ const authCardStyles = {
 /**
  * Shared auth form wrapper that keeps login and signup aligned with the recruitment shell.
  */
-function AuthFormCard({ title, description, children, currentView }) {
+function AuthFormCard({
+  title,
+  description,
+  children,
+  currentView,
+  formTitle,
+  formDescription,
+  highlights = [],
+}) {
   return (
     <PageShell narrow centered>
       <div style={authCardStyles.layout}>
-        <SurfaceCard
-          style={{
-            padding: 'clamp(24px, 4vw, 36px)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '24px',
-          }}
-        >
+        <SurfaceCard style={authCardStyles.heroCard}>
           <header style={authCardStyles.header}>
             <span style={authCardStyles.badge}>Candidate account access</span>
             <h1 style={authCardStyles.title}>{title}</h1>
@@ -119,14 +171,35 @@ function AuthFormCard({ title, description, children, currentView }) {
               </Link>
             </nav>
           </header>
+
+          {highlights.length > 0 ? (
+            <div style={authCardStyles.highlights}>
+              {highlights.map((highlight) => (
+                <div key={highlight.title} style={authCardStyles.highlightCard}>
+                  <h2 style={authCardStyles.highlightTitle}>{highlight.title}</h2>
+                  <p style={authCardStyles.highlightText}>{highlight.description}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </SurfaceCard>
+
+        <SurfaceCard style={authCardStyles.formCard}>
+          {(formTitle || formDescription) && (
+            <div style={authCardStyles.formHeader}>
+              {formTitle ? <h2 style={authCardStyles.formTitle}>{formTitle}</h2> : null}
+              {formDescription ? <p style={authCardStyles.formDescription}>{formDescription}</p> : null}
+            </div>
+          )}
           {children}
         </SurfaceCard>
 
         <MutedCard style={authCardStyles.supportCard}>
-          <h2 style={authCardStyles.supportTitle}>Need a hand?</h2>
+          <h2 style={authCardStyles.supportTitle}>Optional guided help</h2>
           <p style={authCardStyles.supportText}>
-            You can use the guided help experience to understand next steps, but it only explains the
-            process and never makes account decisions for you.
+            You can use the guided help experience to clarify next steps or form expectations. It offers
+            general guidance only and does not create accounts, review credentials, or influence hiring
+            decisions.
           </p>
           <Link to="/" style={authCardStyles.supportLink}>
             Return to dashboard

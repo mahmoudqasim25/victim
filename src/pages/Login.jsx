@@ -89,6 +89,17 @@ const authFormStyles = {
 
 const validateEmail = (email) => /\S+@\S+\.\S+/.test(email)
 
+const loginHighlights = [
+  {
+    title: 'Track progress',
+    description: 'Review application activity, interview updates, and recruiter follow-ups in one place.',
+  },
+  {
+    title: 'Stay prepared',
+    description: 'Keep your candidate profile ready so you can respond quickly when opportunities move.',
+  },
+]
+
 function Login() {
   const navigate = useNavigate()
   const { login } = useAuth()
@@ -142,8 +153,11 @@ function Login() {
   return (
     <AuthFormCard
       currentView="login"
-      title="Welcome back"
-      description="Log in to review your applications, track updates, and stay in sync with the hiring team."
+      title="Access your candidate account"
+      description="Use the same professional sign-in flow across your recruitment experience to review applications, updates, and next steps."
+      formTitle="Log in"
+      formDescription="Enter your account details to continue. Demo access is available with the current mock credentials."
+      highlights={loginHighlights}
     >
       <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate>
         <div style={authFormStyles.statusStack}>
@@ -154,7 +168,7 @@ function Login() {
           ) : null}
           {isSubmitting ? (
             <p style={{ ...authFormStyles.statusMessage, ...authFormStyles.infoMessage }}>
-              Signing you in now. Please keep this window open.
+              Signing you in now. Please keep this window open while we confirm your access.
             </p>
           ) : null}
         </div>
@@ -203,8 +217,11 @@ function Login() {
               ...(errors.password ? authFormStyles.inputError : null),
             }}
             aria-invalid={Boolean(errors.password)}
-            aria-describedby={errors.password ? 'password-error' : undefined}
+            aria-describedby={errors.password ? 'password-error password-helper' : 'password-helper'}
           />
+          <p id="password-helper" style={authFormStyles.helperText}>
+            For demo access, use the current mock password assigned to your test account.
+          </p>
           {errors.password ? (
             <p
               id="password-error"
@@ -221,11 +238,11 @@ function Login() {
           style={isSubmitting ? authFormStyles.disabledButton : authFormStyles.button}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Signing in...' : 'Log in to your account'}
+          {isSubmitting ? 'Signing in...' : 'Log in to continue'}
         </button>
 
         <p style={authFormStyles.secondaryText}>
-          Need to create an account instead? Use the navigation above to switch to profile setup.
+          New here? Select Create profile above to set up your candidate account.
         </p>
       </form>
     </AuthFormCard>

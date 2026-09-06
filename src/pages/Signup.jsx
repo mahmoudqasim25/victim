@@ -103,6 +103,17 @@ const genderOptions = [
   { value: 'prefer-not-to-say', label: 'Prefer not to say' },
 ]
 
+const signupHighlights = [
+  {
+    title: 'Create once',
+    description: 'Set up your candidate account with the current profile fields and return whenever roles progress.',
+  },
+  {
+    title: 'Stay informed',
+    description: 'Receive application-related updates through the email address tied to your account.',
+  },
+]
+
 function Signup() {
   const navigate = useNavigate()
   const { signup } = useAuth()
@@ -188,8 +199,11 @@ function Signup() {
   return (
     <AuthFormCard
       currentView="signup"
-      title="Create your candidate profile"
-      description="Set up your account to track opportunities, manage applications, and stay connected with the recruitment team."
+      title="Create your candidate account"
+      description="Start with the current profile details to manage applications, stay aligned with recruiters, and keep your hiring activity organized."
+      formTitle="Create profile"
+      formDescription="Complete the fields below to open your account. Guided help is optional and only explains the process."
+      highlights={signupHighlights}
     >
       <form style={signupStyles.form} onSubmit={handleSubmit} noValidate>
         <div style={signupStyles.statusStack}>
@@ -199,11 +213,13 @@ function Signup() {
             </p>
           ) : null}
           {submitSuccess ? (
-            <p style={{ ...signupStyles.statusMessage, ...signupStyles.successMessage }}>{submitSuccess}</p>
+            <p role="status" style={{ ...signupStyles.statusMessage, ...signupStyles.successMessage }}>
+              {submitSuccess}
+            </p>
           ) : null}
           {isSubmitting ? (
             <p style={{ ...signupStyles.statusMessage, ...signupStyles.infoMessage }}>
-              Creating your profile now. We will keep your details on this screen until the request finishes.
+              Creating your profile now. Please keep this window open while we save your details.
             </p>
           ) : null}
         </div>
@@ -224,8 +240,11 @@ function Signup() {
               ...(errors.name ? signupStyles.inputError : null),
             }}
             aria-invalid={Boolean(errors.name)}
-            aria-describedby={errors.name ? 'name-error' : undefined}
+            aria-describedby={errors.name ? 'name-error name-helper' : 'name-helper'}
           />
+          <p id="name-helper" style={signupStyles.helperText}>
+            Enter the name you want associated with your applications.
+          </p>
           {errors.name ? (
             <p id="name-error" role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
               {errors.name}
@@ -284,7 +303,7 @@ function Signup() {
             aria-describedby={errors.password ? 'signup-password-error helper-password' : 'helper-password'}
           />
           <p id="helper-password" style={signupStyles.helperText}>
-            Use at least 8 characters. This password only secures your account and does not affect hiring decisions.
+            Use at least 8 characters. This password secures your account and does not affect hiring decisions.
           </p>
           {errors.password ? (
             <p
@@ -320,7 +339,7 @@ function Signup() {
             ))}
           </select>
           <p id="gender-helper" style={signupStyles.helperText}>
-            This uses the current signup contract and helps complete your profile setup.
+            This field remains part of the current signup flow and completes your profile setup.
           </p>
           {errors.gender ? (
             <p id="gender-error" role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
@@ -338,7 +357,7 @@ function Signup() {
         </button>
 
         <p style={signupStyles.secondaryText}>
-          Already registered? Use the navigation above to return to login.
+          Already have an account? Select Log in above to return to sign-in.
         </p>
       </form>
     </AuthFormCard>
