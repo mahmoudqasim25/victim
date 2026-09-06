@@ -1,4 +1,4 @@
-import PageShell, { MutedCard, PageIntro, SurfaceCard } from '../components/PageShell'
+import PageShell, { MutedCard, PageIntro, SectionIntro, SurfaceCard } from '../components/PageShell'
 import { tokens } from '../components/designSystem'
 
 const supportOptions = [
@@ -104,14 +104,10 @@ function ContactUs() {
       </SurfaceCard>
 
       <SurfaceCard>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
-          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-            Support options
-          </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
-            Choose the route that matches your need, whether you are preparing to apply, checking progress, or coordinating with the recruitment team.
-          </p>
-        </div>
+        <SectionIntro
+          title="Support options"
+          description="Choose the route that matches your need, whether you are preparing to apply, checking progress, or coordinating with the recruitment team."
+        />
         <div style={gridStyle('240px')}>
           {supportOptions.map((item) => (
             <MutedCard key={item.label} style={{ backgroundColor: tokens.colors.surface }}>
@@ -124,14 +120,10 @@ function ContactUs() {
       </SurfaceCard>
 
       <SurfaceCard>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
-          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-            When to contact us
-          </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
-            A modern support page should help visitors understand not only how to reach the team, but also when each touchpoint is most useful.
-          </p>
-        </div>
+        <SectionIntro
+          title="When to contact us"
+          description="A modern support page should help visitors understand not only how to reach the team, but also when each touchpoint is most useful."
+        />
         <div style={gridStyle('220px')}>
           {supportMoments.map((item) => (
             <MutedCard key={item.title}>
@@ -143,14 +135,10 @@ function ContactUs() {
       </SurfaceCard>
 
       <SurfaceCard>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '24px' }}>
-          <h2 style={{ margin: 0, fontSize: '1.8rem', color: tokens.colors.text }}>
-            Regional branch coverage
-          </h2>
-          <p style={{ margin: 0, color: tokens.colors.textMuted, lineHeight: 1.7, maxWidth: '760px' }}>
-            These sample branch cards show how localized support can be presented in the same public shell and spacing system.
-          </p>
-        </div>
+        <SectionIntro
+          title="Regional branch coverage"
+          description="These sample branch cards show how localized support can be presented in the same public shell and spacing system."
+        />
         <div style={gridStyle('240px')}>
           {branchItems.map((branch) => (
             <MutedCard key={branch.locationName} style={{ backgroundColor: tokens.colors.surface }}>
@@ -158,7 +146,7 @@ function ContactUs() {
               <h3 style={{ margin: '8px 0 0', fontSize: '1.15rem', color: tokens.colors.text }}>
                 {branch.locationName}
               </h3>
-              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>
+              <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7, overflowWrap: 'anywhere' }}>
                 <strong style={{ color: tokens.colors.text }}>Address:</strong> {branch.address}
               </p>
               <p style={{ margin: '8px 0 0', color: tokens.colors.textMuted, lineHeight: 1.7 }}>

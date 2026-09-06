@@ -42,6 +42,12 @@ export const tokens = {
     contentWidth: '1120px',
     formWidth: '520px',
   },
+  typography: {
+    title: 'clamp(2rem, 5vw, 3.5rem)',
+    sectionTitle: 'clamp(1.5rem, 3vw, 2rem)',
+    body: '1rem',
+    bodyLineHeight: 1.7,
+  },
 };
 
 export const shellStyles = {
@@ -63,6 +69,14 @@ export const shellStyles = {
     flexDirection: 'column',
     gap: tokens.spacing.sectionGap,
     flex: 1,
+  },
+  shellMain: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: tokens.spacing.sectionGap,
+    paddingTop: '24px',
+    boxSizing: 'border-box',
   },
   pageSection: {
     width: '100%',
@@ -128,6 +142,24 @@ export const shellStyles = {
     fontWeight: 700,
     border: `1px solid ${tokens.colors.border}`,
     boxSizing: 'border-box',
+  },
+  sectionHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    marginBottom: '24px',
+  },
+  sectionTitle: {
+    margin: 0,
+    fontSize: tokens.typography.sectionTitle,
+    color: tokens.colors.text,
+  },
+  sectionDescription: {
+    margin: 0,
+    color: tokens.colors.textMuted,
+    lineHeight: tokens.typography.bodyLineHeight,
+    fontSize: tokens.typography.body,
+    maxWidth: '760px',
   },
 };
 

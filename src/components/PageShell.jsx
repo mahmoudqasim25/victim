@@ -6,11 +6,7 @@ import { getPageShellStyles, shellStyles, tokens } from './designSystem';
 function PageShell({ children, narrow = false, centered = false, style }) {
   const pageShell = getPageShellStyles({ narrow, centered });
 
-  return (
-    <section style={{ ...pageShell.page, ...style }}>
-      {children}
-    </section>
-  );
+  return <section style={{ ...pageShell.page, ...style }}>{children}</section>;
 }
 
 /**
@@ -37,7 +33,7 @@ export function PageIntro({ eyebrow, title, description, style }) {
       <h1
         style={{
           margin: 0,
-          fontSize: 'clamp(2.1rem, 5vw, 3.8rem)',
+          fontSize: tokens.typography.title,
           lineHeight: 1.05,
           color: tokens.colors.text,
         }}
@@ -49,7 +45,7 @@ export function PageIntro({ eyebrow, title, description, style }) {
           style={{
             margin: 0,
             color: tokens.colors.textMuted,
-            lineHeight: 1.7,
+            lineHeight: tokens.typography.bodyLineHeight,
             fontSize: '1.02rem',
             maxWidth: '760px',
           }}
@@ -58,6 +54,19 @@ export function PageIntro({ eyebrow, title, description, style }) {
         </p>
       ) : null}
     </header>
+  );
+}
+
+/**
+ * Renders a consistent section heading block for shared route sections.
+ */
+export function SectionIntro({ title, description, children, style }) {
+  return (
+    <div style={{ ...shellStyles.sectionHeader, ...style }}>
+      <h2 style={shellStyles.sectionTitle}>{title}</h2>
+      {description ? <p style={shellStyles.sectionDescription}>{description}</p> : null}
+      {children}
+    </div>
   );
 }
 
