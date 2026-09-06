@@ -8,7 +8,12 @@ const authFormStyles = {
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    gap: '18px',
+  },
+  statusStack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
   },
   fieldGroup: {
     display: 'flex',
@@ -28,16 +33,41 @@ const authFormStyles = {
     color: tokens.colors.text,
     backgroundColor: tokens.colors.surface,
   },
-  errorText: {
+  inputError: {
+    borderColor: tokens.colors.danger,
+    boxShadow: `0 0 0 3px ${tokens.colors.warningSurface}`,
+  },
+  helperText: {
     margin: 0,
-    color: tokens.colors.danger,
+    color: tokens.colors.textSubtle,
     fontSize: '14px',
+    lineHeight: 1.5,
+  },
+  statusMessage: {
+    margin: 0,
+    padding: '12px 14px',
+    borderRadius: tokens.radii.sm,
+    fontSize: '14px',
+    lineHeight: 1.5,
+    border: `1px solid ${tokens.colors.border}`,
+  },
+  errorMessage: {
+    color: tokens.colors.danger,
+    backgroundColor: '#fef2f2',
+    borderColor: '#fecaca',
+  },
+  infoMessage: {
+    color: tokens.colors.primaryStrong,
+    backgroundColor: tokens.colors.primarySoft,
+    borderColor: tokens.colors.borderStrong,
   },
   button: {
     ...shellStyles.primaryButton,
     width: '100%',
     border: 'none',
     cursor: 'pointer',
+    minHeight: '48px',
+    fontSize: '1rem',
   },
   disabledButton: {
     ...shellStyles.primaryButton,
@@ -45,6 +75,15 @@ const authFormStyles = {
     cursor: 'not-allowed',
     opacity: 0.65,
     boxShadow: 'none',
+    minHeight: '48px',
+    fontSize: '1rem',
+  },
+  secondaryText: {
+    margin: 0,
+    textAlign: 'center',
+    color: tokens.colors.textSubtle,
+    fontSize: '14px',
+    lineHeight: 1.6,
   },
 }
 
@@ -66,13 +105,13 @@ function Login() {
     const trimmedEmail = email.trim()
 
     if (!trimmedEmail) {
-      nextErrors.email = 'Please enter your email address.'
+      nextErrors.email = 'Enter the email address you used for your candidate account.'
     } else if (!validateEmail(trimmedEmail)) {
-      nextErrors.email = 'Please enter a valid email address.'
+      nextErrors.email = 'Check the email format and try again.'
     }
 
     if (!password) {
-      nextErrors.password = 'Please enter your password.'
+      nextErrors.password = 'Enter your password to continue.'
     }
 
     setErrors(nextErrors)
@@ -88,21 +127,38 @@ function Login() {
       const result = await login(trimmedEmail, password)
 
       if (result?.error) {
-        setAuthError('Unable to sign in with those credentials. Please try again.')
+        setAuthError(result.error.message || 'We could not sign you in with those details.')
         return
       }
 
       navigate('/')
     } catch {
-      setAuthError('Unable to sign in right now. Please try again in a moment.')
+      setAuthError('We could not sign you in right now. Please try again in a moment.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
   return (
-    <AuthFormCard title="Candidate log in" description="Enter your email and password to continue.">
+    <AuthFormCard
+      currentView="login"
+      title="Welcome back"
+      description="Log in to review your applications, track updates, and stay in sync with the hiring team."
+    >
       <form style={authFormStyles.form} onSubmit={handleSubmit} noValidate>
+        <div style={authFormStyles.statusStack}>
+          {authError ? (
+            <p role="alert" style={{ ...authFormStyles.statusMessage, ...authFormStyles.errorMessage }}>
+              {authError}
+            </p>
+          ) : null}
+          {isSubmitting ? (
+            <p style={{ ...authFormStyles.statusMessage, ...authFormStyles.infoMessage }}>
+              Signing you in now. Please keep this window open.
+            </p>
+          ) : null}
+        </div>
+
         <div style={authFormStyles.fieldGroup}>
           <label htmlFor="email" style={authFormStyles.label}>
             Email
@@ -114,12 +170,18 @@ function Login() {
             autoComplete="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            style={authFormStyles.input}
+            style={{
+              ...authFormStyles.input,
+              ...(errors.email ? authFormStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'email-error' : undefined}
+            aria-describedby={errors.email ? 'email-error email-helper' : 'email-helper'}
           />
+          <p id="email-helper" style={authFormStyles.helperText}>
+            Use the same email address you registered with.
+          </p>
           {errors.email ? (
-            <p id="email-error" style={authFormStyles.errorText}>
+            <p id="email-error" role="alert" style={{ ...authFormStyles.statusMessage, ...authFormStyles.errorMessage }}>
               {errors.email}
             </p>
           ) : null}
@@ -136,26 +198,35 @@ function Login() {
             autoComplete="current-password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            style={authFormStyles.input}
+            style={{
+              ...authFormStyles.input,
+              ...(errors.password ? authFormStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.password)}
             aria-describedby={errors.password ? 'password-error' : undefined}
           />
           {errors.password ? (
-            <p id="password-error" style={authFormStyles.errorText}>
+            <p
+              id="password-error"
+              role="alert"
+              style={{ ...authFormStyles.statusMessage, ...authFormStyles.errorMessage }}
+            >
               {errors.password}
             </p>
           ) : null}
         </div>
-
-        {authError ? <p style={authFormStyles.errorText}>{authError}</p> : null}
 
         <button
           type="submit"
           style={isSubmitting ? authFormStyles.disabledButton : authFormStyles.button}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Signing in...' : 'Log in'}
+          {isSubmitting ? 'Signing in...' : 'Log in to your account'}
         </button>
+
+        <p style={authFormStyles.secondaryText}>
+          Need to create an account instead? Use the navigation above to switch to profile setup.
+        </p>
       </form>
     </AuthFormCard>
   )

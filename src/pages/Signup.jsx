@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import AuthFormCard from '../components/AuthFormCard'
 import { shellStyles, tokens } from '../components/designSystem'
@@ -8,7 +8,12 @@ const signupStyles = {
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '16px',
+    gap: '18px',
+  },
+  statusStack: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
   },
   fieldGroup: {
     display: 'flex',
@@ -28,27 +33,46 @@ const signupStyles = {
     color: tokens.colors.text,
     backgroundColor: tokens.colors.surface,
   },
+  inputError: {
+    borderColor: tokens.colors.danger,
+    boxShadow: `0 0 0 3px ${tokens.colors.warningSurface}`,
+  },
   helperText: {
     margin: 0,
     color: tokens.colors.textSubtle,
     fontSize: '14px',
     lineHeight: 1.5,
   },
-  errorText: {
+  statusMessage: {
     margin: 0,
-    color: tokens.colors.danger,
+    padding: '12px 14px',
+    borderRadius: tokens.radii.sm,
     fontSize: '14px',
+    lineHeight: 1.5,
+    border: `1px solid ${tokens.colors.border}`,
   },
-  successText: {
-    margin: 0,
+  errorMessage: {
+    color: tokens.colors.danger,
+    backgroundColor: '#fef2f2',
+    borderColor: '#fecaca',
+  },
+  successMessage: {
     color: tokens.colors.success,
-    fontSize: '14px',
+    backgroundColor: '#ecfdf5',
+    borderColor: '#a7f3d0',
+  },
+  infoMessage: {
+    color: tokens.colors.primaryStrong,
+    backgroundColor: tokens.colors.primarySoft,
+    borderColor: tokens.colors.borderStrong,
   },
   button: {
     ...shellStyles.primaryButton,
     width: '100%',
     border: 'none',
     cursor: 'pointer',
+    minHeight: '48px',
+    fontSize: '1rem',
   },
   disabledButton: {
     ...shellStyles.primaryButton,
@@ -56,21 +80,19 @@ const signupStyles = {
     cursor: 'not-allowed',
     opacity: 0.65,
     boxShadow: 'none',
+    minHeight: '48px',
+    fontSize: '1rem',
   },
-  footer: {
-    textAlign: 'center',
-    color: tokens.colors.textMuted,
+  secondaryText: {
     margin: 0,
-  },
-  footerLink: {
-    color: tokens.colors.primaryStrong,
-    fontWeight: 700,
-    textDecoration: 'none',
+    textAlign: 'center',
+    color: tokens.colors.textSubtle,
+    fontSize: '14px',
+    lineHeight: 1.6,
   },
 }
 
 const validateEmail = (email) => /\S+@\S+\.\S+/.test(email)
-
 const validatePassword = (password) => password.length >= 8
 
 const genderOptions = [
@@ -112,23 +134,23 @@ function Signup() {
     const trimmedEmail = formValues.email.trim()
 
     if (!trimmedName) {
-      nextErrors.name = 'Please enter your name.'
+      nextErrors.name = 'Enter your full name so recruiters know who is applying.'
     }
 
     if (!trimmedEmail) {
-      nextErrors.email = 'Please enter your email address.'
+      nextErrors.email = 'Enter an email address for account updates and sign-in.'
     } else if (!validateEmail(trimmedEmail)) {
-      nextErrors.email = 'Please enter a valid email address.'
+      nextErrors.email = 'Check the email format and try again.'
     }
 
     if (!formValues.password) {
-      nextErrors.password = 'Please create a password.'
+      nextErrors.password = 'Create a password with at least 8 characters.'
     } else if (!validatePassword(formValues.password)) {
-      nextErrors.password = 'Password must be at least 8 characters long.'
+      nextErrors.password = 'Your password must be at least 8 characters long.'
     }
 
     if (!formValues.gender) {
-      nextErrors.gender = 'Please select a gender.'
+      nextErrors.gender = 'Select the option that best matches you.'
     }
 
     setErrors(nextErrors)
@@ -165,13 +187,30 @@ function Signup() {
 
   return (
     <AuthFormCard
+      currentView="signup"
       title="Create your candidate profile"
-      description="Set up your account to track opportunities and stay connected with the recruitment team."
+      description="Set up your account to track opportunities, manage applications, and stay connected with the recruitment team."
     >
       <form style={signupStyles.form} onSubmit={handleSubmit} noValidate>
+        <div style={signupStyles.statusStack}>
+          {submitError ? (
+            <p role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
+              {submitError}
+            </p>
+          ) : null}
+          {submitSuccess ? (
+            <p style={{ ...signupStyles.statusMessage, ...signupStyles.successMessage }}>{submitSuccess}</p>
+          ) : null}
+          {isSubmitting ? (
+            <p style={{ ...signupStyles.statusMessage, ...signupStyles.infoMessage }}>
+              Creating your profile now. We will keep your details on this screen until the request finishes.
+            </p>
+          ) : null}
+        </div>
+
         <div style={signupStyles.fieldGroup}>
           <label htmlFor="name" style={signupStyles.label}>
-            Name
+            Full name
           </label>
           <input
             id="name"
@@ -180,12 +219,15 @@ function Signup() {
             autoComplete="name"
             value={formValues.name}
             onChange={handleChange}
-            style={signupStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.name ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? 'name-error' : undefined}
           />
           {errors.name ? (
-            <p id="name-error" style={signupStyles.errorText}>
+            <p id="name-error" role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
               {errors.name}
             </p>
           ) : null}
@@ -202,12 +244,22 @@ function Signup() {
             autoComplete="email"
             value={formValues.email}
             onChange={handleChange}
-            style={signupStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.email ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.email)}
-            aria-describedby={errors.email ? 'signup-email-error' : undefined}
+            aria-describedby={errors.email ? 'signup-email-error signup-email-helper' : 'signup-email-helper'}
           />
+          <p id="signup-email-helper" style={signupStyles.helperText}>
+            We will use this for sign-in and important application updates.
+          </p>
           {errors.email ? (
-            <p id="signup-email-error" style={signupStyles.errorText}>
+            <p
+              id="signup-email-error"
+              role="alert"
+              style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}
+            >
               {errors.email}
             </p>
           ) : null}
@@ -224,15 +276,22 @@ function Signup() {
             autoComplete="new-password"
             value={formValues.password}
             onChange={handleChange}
-            style={signupStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.password ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.password)}
             aria-describedby={errors.password ? 'signup-password-error helper-password' : 'helper-password'}
           />
           <p id="helper-password" style={signupStyles.helperText}>
-            Use at least 8 characters.
+            Use at least 8 characters. This password only secures your account and does not affect hiring decisions.
           </p>
           {errors.password ? (
-            <p id="signup-password-error" style={signupStyles.errorText}>
+            <p
+              id="signup-password-error"
+              role="alert"
+              style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}
+            >
               {errors.password}
             </p>
           ) : null}
@@ -247,9 +306,12 @@ function Signup() {
             name="gender"
             value={formValues.gender}
             onChange={handleChange}
-            style={signupStyles.input}
+            style={{
+              ...signupStyles.input,
+              ...(errors.gender ? signupStyles.inputError : null),
+            }}
             aria-invalid={Boolean(errors.gender)}
-            aria-describedby={errors.gender ? 'gender-error' : undefined}
+            aria-describedby={errors.gender ? 'gender-error gender-helper' : 'gender-helper'}
           >
             {genderOptions.map((option) => (
               <option key={option.value || 'placeholder'} value={option.value}>
@@ -257,31 +319,28 @@ function Signup() {
               </option>
             ))}
           </select>
+          <p id="gender-helper" style={signupStyles.helperText}>
+            This uses the current signup contract and helps complete your profile setup.
+          </p>
           {errors.gender ? (
-            <p id="gender-error" style={signupStyles.errorText}>
+            <p id="gender-error" role="alert" style={{ ...signupStyles.statusMessage, ...signupStyles.errorMessage }}>
               {errors.gender}
             </p>
           ) : null}
         </div>
-
-        {submitError ? <p style={signupStyles.errorText}>{submitError}</p> : null}
-        {submitSuccess ? <p style={signupStyles.successText}>{submitSuccess}</p> : null}
 
         <button
           type="submit"
           style={isSubmitting ? signupStyles.disabledButton : signupStyles.button}
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Creating account...' : 'Create profile'}
+          {isSubmitting ? 'Creating profile...' : 'Create your profile'}
         </button>
-      </form>
 
-      <p style={signupStyles.footer}>
-        Already have an account?{' '}
-        <Link to="/login" style={signupStyles.footerLink}>
-          Log in
-        </Link>
-      </p>
+        <p style={signupStyles.secondaryText}>
+          Already registered? Use the navigation above to return to login.
+        </p>
+      </form>
     </AuthFormCard>
   )
 }
