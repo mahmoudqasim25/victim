@@ -6,6 +6,7 @@ const authCardStyles = {
   layout: {
     display: 'grid',
     gap: '20px',
+    paddingBottom: '8px',
   },
   heroCard: {
     display: 'grid',

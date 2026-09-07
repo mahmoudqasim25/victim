@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Navbar from './components/Navbar'
+import AppFooter from './components/AppFooter'
 import Home from './pages/Home'
 import HelloWorld from './pages/HelloWorld'
 import Login from './pages/Login'
@@ -38,6 +39,7 @@ function AppLayout() {
           <Route path="/partners" element={<Partners />} />
         </Routes>
       </main>
+      <AppFooter />
     </div>
   )
 }

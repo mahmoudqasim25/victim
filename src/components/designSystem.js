@@ -55,6 +55,48 @@ export const tokens = {
   },
 };
 
+export const footerContent = {
+  company: {
+    eyebrow: 'Recruitment footer',
+    name: 'FlairsTech Recruitment',
+    description:
+      'Placeholder company summary for the recruitment experience. Replace this neutral overview with approved employer messaging when live copy is ready.',
+    contact: [
+      'Placeholder contact email: recruitment@example.com',
+      'Placeholder support line: +00 000 000 0000',
+      'Placeholder office hours: Monday to Friday, 9:00 to 17:00',
+    ],
+  },
+  sections: [
+    {
+      title: 'Navigation',
+      links: [
+        { label: 'Overview', href: '#', isPlaceholder: true },
+        { label: 'Open roles', href: '#', isPlaceholder: true },
+        { label: 'Candidate profile', href: '#', isPlaceholder: true },
+      ],
+    },
+    {
+      title: 'Support',
+      links: [
+        { label: 'Application help', href: '#', isPlaceholder: true },
+        { label: 'Interview guidance', href: '#', isPlaceholder: true },
+        { label: 'Accessibility support', href: '#', isPlaceholder: true },
+      ],
+    },
+    {
+      title: 'Legal',
+      links: [
+        { label: 'Privacy notice', href: '#', isPlaceholder: true },
+        { label: 'Cookie preferences', href: '#', isPlaceholder: true },
+        { label: 'Terms of use', href: '#', isPlaceholder: true },
+      ],
+    },
+  ],
+  legalNotice:
+    'Placeholder legal text: this footer uses sample recruitment content and non-live destinations for layout review only.',
+};
+
 export const shellStyles = {
   appShell: {
     minHeight: '100vh',
@@ -93,6 +135,10 @@ export const shellStyles = {
     display: 'flex',
     flexDirection: 'column',
     gap: tokens.spacing.sectionGap,
+  },
+  pageContent: {
+    paddingTop: '24px',
+    paddingBottom: '8px',
   },
   sectionCard: {
     backgroundColor: tokens.colors.surface,
