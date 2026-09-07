@@ -6,7 +6,7 @@ import { getPageShellStyles, shellStyles, tokens } from './designSystem';
 function PageShell({ children, narrow = false, centered = false, style }) {
   const pageShell = getPageShellStyles({ narrow, centered });
 
-  return <section style={{ ...pageShell.page, ...style }}>{children}</section>;
+  return <section style={{ ...pageShell.page, ...shellStyles.pageContent, ...style }}>{children}</section>;
 }
 
 /**

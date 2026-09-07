@@ -136,6 +136,10 @@ export const shellStyles = {
     flexDirection: 'column',
     gap: tokens.spacing.sectionGap,
   },
+  pageContent: {
+    paddingTop: '24px',
+    paddingBottom: '8px',
+  },
   sectionCard: {
     backgroundColor: tokens.colors.surface,
     border: `1px solid ${tokens.colors.border}`,
